@@ -1,0 +1,101 @@
+* † -> Š‘
+
+set safe off
+*set console on
+set console off
+clear
+
+close data
+
+************
+
+
+sele 1
+*use  rj_
+use  smaf_j
+
+sele 2
+*use  ks_
+use  smaf_k
+zap
+
+
+sele smaf_j
+goto top
+
+LOCATE  for .T.
+
+**
+
+do while .T.
+
+  if eof()
+	exit
+  endif
+
+do recxx
+
+sele smaf_j
+skip
+
+enddo
+
+**
+
+close data
+***********
+
+clear
+
+
+return
+**************************************************
+**************************************************
+proc recxx
+
+sele smaf_j
+scat memvar 
+
+sele smaf_k
+
+**
+
+append blank
+
+repl smaf_kdata   with m.smaf_jdata
+repl smaf_kdokk   with m.smaf_jdokk
+repl smaf_kdokn   with m.smaf_jdokn
+repl smaf_kdokd   with m.smaf_jdokd
+repl smaf_kto    with m.smaf_jto
+
+repl smaf_ks     with m.smaf_jdb
+repl smaf_ksn    with m.smaf_jdbn
+repl smaf_kks    with m.smaf_jkr
+repl smaf_kksn   with m.smaf_jkrn
+
+repl smaf_kdb   with m.smaf_jrub
+repl smaf_kkr   with 0
+
+******
+append blank
+
+repl smaf_kdata   with m.smaf_jdata
+repl smaf_kdokk   with m.smaf_jdokk
+repl smaf_kdokn   with m.smaf_jdokn
+repl smaf_kdokd   with m.smaf_jdokd
+repl smaf_kto     with m.smaf_jto
+
+
+repl smaf_ks     with m.smaf_jkr
+repl smaf_ksn    with m.smaf_jkrn
+repl smaf_kks    with m.smaf_jdb
+repl smaf_kksn   with m.smaf_jdbn
+
+repl smaf_kkr   with m.smaf_jrub
+
+repl smaf_kdb   with 0
+
+
+return
+***************************
+***************************

@@ -1,0 +1,10 @@
+SELECT smaf_C.*, smaf_K.*;
+ FROM smaf_K, smaf_C;
+ WHERE smaf_C.smaf_C0 = smaf_K.smaf_K0;
+   AND smaf_K.smaf_KS = smaf_C.smaf_CS;
+   AND smaf_K.smaf_KDATA >= smaf_C.smaf_CDATS;
+   AND smaf_K.smaf_KDATA < smaf_C.smaf_CDATD;
+   AND smaf_K.smaf_KKR = 0;
+ ORDER BY smaf_K.smaf_KKS;
+ INTO CURSOR smaf_KQV
+REPORT FORM smaf_KRV.FRX TO FILE smaf_V.TXT NOCONSOLE

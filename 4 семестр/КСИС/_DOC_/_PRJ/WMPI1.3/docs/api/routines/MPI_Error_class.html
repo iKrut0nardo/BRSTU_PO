@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (WinNT; I) [Netscape]">
+   <TITLE>MPI_Error_class</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<A NAME="MPI_Error_class"></A>
+<H1>
+MPI_Error_class</H1>
+Converts an error code into an error class
+<H2>
+Synopsis</H2>
+
+<PRE>
+<TT>#include "mpi.h"
+int MPI_Error_class( errorcode, errorclass )
+int errorcode, *errorclass;</TT></PRE>
+
+<H2>
+Input Parameter</H2>
+
+<DL>
+<DT>
+<B>errorcode </B>- Error code returned by an MPI routine</DT>
+</DL>
+
+<H2>
+Output Parameter</H2>
+
+<DL>
+<DT>
+<B>errorclass </B>- Error class associated with <TT>errorcode</TT></DT>
+</DL>
+
+<H2>
+Notes for Fortran</H2>
+All MPI routines in Fortran (except for <TT>MPI_WTIME</TT> and <TT>MPI_WTICK</TT>)
+have an additional argument <TT>ierr</TT> at the end of the argument list.
+<TT>ierr</TT> is an integer and has the same meaning as the return value
+of the routine in C. In Fortran, MPI routines are subroutines, and are
+invoked with the <TT>call</TT> statement.
+
+<P>All MPI objects (e.g., <TT>MPI_Datatype</TT>, <TT>MPI_Comm</TT>) are
+of type <TT>INTEGER</TT> in Fortran.
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>&nbsp;
+</BODY>
+</HTML>

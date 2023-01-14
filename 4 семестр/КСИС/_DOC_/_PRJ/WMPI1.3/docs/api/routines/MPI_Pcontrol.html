@@ -1,0 +1,31 @@
+<HTML>
+<TITLE>MPI_Pcontrol</TITLE>
+<BODY BGCOLOR="FFFFFF">
+<A NAME="MPI_Pcontrol"><H1>MPI_Pcontrol</H1></A>
+Controls profiling 
+<H2>Synopsis</H2>
+<PRE><CODE>
+#include "mpi.h"
+int MPI_Pcontrol( level )
+int level;
+</CODE></PRE>
+<H2>Input Parameters</H2>
+<DL><DT><B>level </B> - Profiling level 
+</DL>
+<P>
+<H2>Notes</H2>
+This routine provides a common interface for profiling control.  The
+interpretation of <TT>level</TT> and any other arguments is left to the
+profiling library.
+<P>
+<H2>Notes for Fortran</H2>
+All MPI routines in Fortran (except for <TT>MPI_WTIME</TT> and <TT>MPI_WTICK</TT>) have
+an additional argument <TT>ierr</TT> at the end of the argument list.  <TT>ierr</TT>
+is an integer and has the same meaning as the return value of the routine
+in C.  In Fortran, MPI routines are subroutines, and are invoked with the
+<TT>call</TT> statement.
+<P>
+All MPI objects (e.g., <TT>MPI_Datatype</TT>, <TT>MPI_Comm</TT>) are of type <TT>INTEGER</TT>
+in Fortran.
+
+</BODY></HTML>

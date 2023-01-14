@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>WMPI 1.3: Docs: MS Visual C - Digital Fortran Changes</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+<P ALIGN="CENTER"><B><FONT SIZE=+2>WMPI 1.3 Changes</FONT><BR>
+  August 1999</B> </P>
+<BLOCKQUOTE> 
+  <BLOCKQUOTE> 
+    <BLOCKQUOTE>
+      <P><B>WMPI 1.3 </B>is mainly a bug fix release and it also brings some new 
+        features.</P>
+      <P>+Better performance for medium and large sized messages, especially on 
+        high speed networks.</P>
+      <P>+SMP bug fixed. It was a bug that caused computations to hang when run 
+        on SMP systems.</P>
+      <P> +Better resource management. Some resources were not deallocated at 
+        the end of the computation, now there is a better cleanup. This cleanup 
+        also applies to the processes. There were some bug reports about slaves 
+        not dying. Now MPI_Finalize performs a better killing of the processes.</P>
+      <P> +Minor bugs in the service and daemon resolved.</P>
+      <P>+Compatibility with MPICH 1.1.2. As with the previous releases (apart 
+        from minor glitches) WMPI continues to be compatible with MPICH so as 
+        to bridge WinNT with Unix. (Tested w/ Linux)</P>
+      <P> +Fortran bindings corrected. There were problems with string arguments 
+        which have been fixed with a new interface.</P>
+      <P> +Available for Alpha platforms.</P>
+      <P> +Absoft Pro Fortran tools supported.</P>
+      <P>1999/08/27 Dependable Systems Group CISUC-DEI-UC</P>
+    </BLOCKQUOTE>
+  </BLOCKQUOTE>
+</BLOCKQUOTE>
+</BODY>
+</HTML>

@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#  profile: https://ogp.me/ns/profile#"><head>
+	<link rel="icon" href="https://prog-cpp.ru/wp-content/themes/progcpp/images/icon.ico">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="yandex-verification" content="6b8cb5dbd9f1b403">
+	
+	
+<!-- This site is optimized with the Yoast SEO plugin v6.1.1 - https://yoa.st/1yg?utm_content=6.1.1 -->
+<title>Создание проекта на языке ассемблера в Microsoft Visual Studio 2010</title>
+<meta name="description" content="Создание проекта на языке ассемблера в Microsoft Visual Studio 2010: подключение инструмента Microsoft Macro Assembler, подсветка синтаксиса ассемблера">
+<link rel="canonical" href="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/a.htm">
+<link rel="publisher" href="https://plus.google.com/communities/102458218858588097327">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Создание проекта на языке ассемблера в Microsoft Visual Studio 2010">
+<meta property="og:description" content="Создание проекта на языке ассемблера в Microsoft Visual Studio 2010: подключение инструмента Microsoft Macro Assembler, подсветка синтаксиса ассемблера">
+<meta property="og:url" content="https://prog-cpp.ru/asm-vs/">
+<meta property="og:site_name" content="Программирование">
+<meta property="article:publisher" content="https://www.facebook.com/elena.vstavskaya">
+<meta property="article:tag" content="Microsoft Visual Studio">
+<meta property="article:section" content="Язык ассемблера">
+<meta property="article:published_time" content="2014-06-22T22:15:05+00:00">
+<meta property="article:modified_time" content="2015-11-27T19:54:13+00:00">
+<meta property="og:updated_time" content="2015-11-27T19:54:13+00:00">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/04/vs5.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/04/vs5.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs11.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs11.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs2.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs2.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs3.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs3.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs4.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs4.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs5.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs5.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs6.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs6.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs7.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs7.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs8.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs8.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs9.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs9.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs10.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs10.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs111.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs111.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs12.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs12.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs13.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs13.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs14.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs14.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs15.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs15.png">
+<meta property="og:image" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs16.png">
+<meta property="og:image:secure_url" content="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs16.png">
+<script src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/cbgapi.loaded_1" async=""></script><script src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/cbgapi.loaded_0" async=""></script><script type="text/javascript" async="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/recaptcha__ru.js"></script><script type="text/javascript" async="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/watch.js"></script><script async="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/analytics.js"></script><script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"WebSite","@id":"#website","url":"https:\/\/prog-cpp.ru\/","name":"\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435","potentialAction":{"@type":"SearchAction","target":"https:\/\/prog-cpp.ru\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"Person","url":"https:\/\/prog-cpp.ru\/asm-vs\/","sameAs":["https:\/\/www.facebook.com\/elena.vstavskaya","https:\/\/plus.google.com\/communities\/102458218858588097327","https:\/\/www.youtube.com\/channel\/UCyfJ9pWTyIum-ejNpe2_WKw"],"@id":"#person","name":"\u0415\u043b\u0435\u043d\u0430 \u0412\u0441\u0442\u0430\u0432\u0441\u043a\u0430\u044f"}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Программирование » Лента комментариев к «Создание проекта на языке ассемблера в Microsoft Visual Studio Express 2010»" href="https://prog-cpp.ru/asm-vs/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/prog-cpp.ru\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.2"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56794,8205,9794,65039],[55358,56794,8203,9794,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/wp-emoji-release.js" type="text/javascript" defer="defer"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="contact-form-7-css" href="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="mce-comments-no-status-bar-css" href="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/editor-no-statusbar.css" type="text/css" media="all">
+<link rel="stylesheet" id="style-css" href="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/jquery.js" async="async"></script>
+<link rel="https://api.w.org/" href="https://prog-cpp.ru/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://prog-cpp.ru/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://prog-cpp.ru/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.9.2">
+<link rel="shortlink" href="https://prog-cpp.ru/?p=597">
+<link rel="alternate" type="application/json+oembed" href="https://prog-cpp.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fprog-cpp.ru%2Fasm-vs%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://prog-cpp.ru/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fprog-cpp.ru%2Fasm-vs%2F&amp;format=xml">
+<script src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/api.js" async="" defer="defer"></script>
+	<meta name="msvalidate.01" content="C492F76B6F30A7F45EA272CAB3E15ADB">
+	<script src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/platform.js" async="" defer="defer" gapi_processed="true"></script>
+
+	<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/openapi.js"></script>
+	<script src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/share.js" async="async"></script>
+<script src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/watch.js" defer="defer"></script><style type="text/css">.ya-share2,
+.ya-share2 * {
+  line-height: normal;
+}
+.ya-share2 :link:hover,
+.ya-share2 :visited:hover {
+  color: #000 !important;
+}
+.ya-share2 input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  line-height: normal;
+}
+.ya-share2__container_size_m {
+  font-size: 13px;
+}
+.ya-share2__container_size_m .ya-share2__icon {
+  height: 24px;
+  width: 24px;
+  background-size: 24px 24px;
+}
+.ya-share2__container_size_m .ya-share2__title {
+  line-height: 24px;
+}
+.ya-share2__container_size_m .ya-share2__item {
+  margin: 5px 4px 5px 0;
+}
+.ya-share2__container_size_m .ya-share2__item:last-child {
+  margin-right: 0;
+}
+.ya-share2__container_size_m .ya-share2__counter {
+  font-size: 12px;
+  line-height: 24px;
+  padding: 0 8px;
+}
+.ya-share2__container_size_m .ya-share2__counter:before {
+  margin-left: -8px;
+}
+.ya-share2__container_size_m .ya-share2__icon_more:before {
+  font-size: 12px;
+  line-height: 24px;
+}
+.ya-share2__container_size_m .ya-share2__popup {
+  padding: 5px 10px;
+}
+.ya-share2__container_size_m .ya-share2__popup_direction_bottom {
+  top: 28px;
+}
+.ya-share2__container_size_m .ya-share2__popup_direction_top {
+  bottom: 28px;
+}
+.ya-share2__container_size_m .ya-share2__input_copy {
+  width: 140px;
+}
+.ya-share2__container_size_m .ya-share2__badge + .ya-share2__title {
+  margin-left: 10px;
+}
+.ya-share2__container_size_s {
+  font-size: 12px;
+}
+.ya-share2__container_size_s .ya-share2__icon {
+  height: 18px;
+  width: 18px;
+  background-size: 18px 18px;
+}
+.ya-share2__container_size_s .ya-share2__title {
+  line-height: 18px;
+}
+.ya-share2__container_size_s .ya-share2__item {
+  margin: 3px 4px 3px 0;
+}
+.ya-share2__container_size_s .ya-share2__item:last-child {
+  margin-right: 0;
+}
+.ya-share2__container_size_s .ya-share2__counter {
+  font-size: 10px;
+  line-height: 18px;
+  padding: 0 6px;
+}
+.ya-share2__container_size_s .ya-share2__counter:before {
+  margin-left: -6px;
+}
+.ya-share2__container_size_s .ya-share2__icon_more:before {
+  font-size: 10px;
+  line-height: 18px;
+}
+.ya-share2__container_size_s .ya-share2__popup {
+  padding: 3px 6px;
+}
+.ya-share2__container_size_s .ya-share2__popup_direction_bottom {
+  top: 21px;
+}
+.ya-share2__container_size_s .ya-share2__popup_direction_top {
+  bottom: 21px;
+}
+.ya-share2__container_size_s .ya-share2__input_copy {
+  width: 110px;
+}
+.ya-share2__container_size_s .ya-share2__badge + .ya-share2__title {
+  margin-left: 6px;
+}
+.ya-share2__list_direction_horizontal > .ya-share2__item {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.ya-share2__list_direction_horizontal > .ya-share2__item > .ya-share2__link > .ya-share2__title {
+  display: none;
+}
+.ya-share2__list_direction_vertical > .ya-share2__item {
+  display: block;
+  margin-right: 0;
+}
+.ya-share2__list_direction_vertical > .ya-share2__item > .ya-share2__link > .ya-share2__badge > .ya-share2__counter {
+  display: none;
+}
+.ya-share2__list {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.ya-share2__item {
+  font-family: Arial, sans;
+  display: inline-block;
+}
+.ya-share2__item:hover {
+  opacity: 0.9;
+}
+.ya-share2__link {
+  display: inline-block;
+  vertical-align: top;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ya-share2__badge {
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 2px;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+.ya-share2__icon {
+  display: inline-block;
+  vertical-align: top;
+}
+.ya-share2__icon:active {
+  box-shadow: inset 0 2px 0 0 rgba(0,0,0,0.1);
+}
+.ya-share2__counter {
+  display: none;
+}
+.ya-share2__counter:before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  top: 2px;
+  bottom: 2px;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX///+nxBvIAAAAAXRSTlMz/za5cAAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=") 0 0 repeat-y;
+}
+.ya-share2__counter_visible {
+  display: inline-block;
+}
+.ya-share2__title {
+  display: inline-block;
+  color: #000;
+  vertical-align: bottom;
+}
+.ya-share2__title:hover {
+  color: #f00;
+}
+.ya-share2__item_more {
+  position: relative;
+}
+.ya-share2__item_more:hover {
+  opacity: 1;
+}
+.ya-share2__icon_more {
+  background-color: #fff;
+  border: 1px solid #cdcdcd;
+  box-sizing: border-box;
+  position: relative;
+}
+.ya-share2__icon_more:before {
+  content: '•••';
+  color: #a0a0a0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+}
+.ya-share2__popup {
+  position: absolute;
+  display: none;
+  border: 1px solid #e6e6e6;
+  z-index: 9999;
+  background-color: #fff;
+}
+.ya-share2__popup_direction_bottom {
+  box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
+}
+.ya-share2__popup_direction_top {
+  box-shadow: 0 0 20px -5px rgba(0,0,0,0.4);
+}
+.ya-share2__popup_list-direction_horizontal {
+  right: 0;
+}
+.ya-share2__popup_list-direction_vertical {
+  left: 0;
+}
+.ya-share2__popup_visible {
+  display: block;
+}
+.ya-share2__popup_clipboard .ya-share2__input_copy,
+.ya-share2__link_copy {
+  display: none;
+}
+.ya-share2__popup_clipboard .ya-share2__link_copy {
+  display: inline-block;
+}
+
+.ya-share2__item_service_blogger .ya-share2__badge
+{
+    background-color: #fb8f3d;
+}
+
+.ya-share2__item_service_blogger .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19.896 14.833A5.167 5.167 0 0 1 14.729 20H9.166A5.167 5.167 0 0 1 4 14.833V9.167A5.166 5.166 0 0 1 9.166 4h2.608a5.167 5.167 0 0 1 5.167 5.167l.002.011c.037.536.484.96 1.03.96l.018-.002h.872c.57 0 1.034.463 1.034 1.034l-.001 3.663zM9.038 10.176h2.926a.993.993 0 0 0 0-1.987H9.038a.994.994 0 0 0 0 1.987zm5.867 3.83H9.032a.94.94 0 0 0 0 1.879h5.873a.94.94 0 1 0 0-1.88z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_collections .ya-share2__badge
+{
+    background-color: #eb1c00;
+}
+
+.ya-share2__item_service_collections .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 18l5-2.71L17 18V6H7v12z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_delicious .ya-share2__badge
+{
+    background-color: #31a9ff;
+}
+
+.ya-share2__item_service_delicious .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 12h8v8H4zm8-8h8v8h-7.984z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_digg .ya-share2__badge
+{
+    background-color: #000;
+}
+
+.ya-share2__item_service_digg .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.555 10.814V14.1h.96s.18.005.18-.222v-3.287h-.96s-.18-.006-.18.222zm8.032 3.065v-3.287h-.96s-.18-.006-.18.222V14.1h.96s.18.006.18-.222zm-5.306 1.32c0 .227-.18.222-.18.222H4V9.497c0-.227.18-.222.18-.222h2.514V7.222c0-.227.18-.222.18-.222h1.408l-.001 8.199zm2.065 0c0 .227-.18.221-.18.221H8.761V9.496c0-.226.18-.221.18-.221h1.406v5.924zm0-7.103c0 .227-.18.222-.18.222H8.76V7.222c0-.227.18-.222.18-.222h1.408l-.001 1.096zm4.827 9.21c0 .228-.18.223-.18.223h-4.1v-1.096c0-.227.18-.222.18-.222h2.513v-.79h-2.694V9.497c0-.227.18-.222.18-.222l4.102.003v8.029zm4.826 0c0 .228-.18.223-.18.223h-4.1v-1.096c0-.227.18-.222.18-.222h2.514v-.79h-2.695V9.497c0-.227.18-.222.18-.222L20 9.279v8.028zm-1.585-3.427v-3.287h-.96s-.18-.006-.18.222V14.1h.96s.18.006.18-.222z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_evernote .ya-share2__badge
+{
+    background-color: #24d666;
+}
+
+.ya-share2__item_service_evernote .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.277 7.109h1.517c.08 0 .16-.08.16-.16V5.313c0-.28.08-.559.159-.758l.04-.12L5.2 7.348l.16-.08c.239-.12.558-.16.917-.16zm11.654-.28c-.12-.638-.479-.917-.838-1.037-.36-.12-.718-.28-1.676-.4-.759-.08-1.557-.12-2.116-.12-.16-.438-.399-.917-1.317-1.156-.638-.16-1.796-.12-2.155-.08-.559.08-.758.319-.918.479-.16.16-.28.598-.28.878v1.556c0 .48-.318.838-.877.838H6.397c-.32 0-.559.04-.758.12-.16.12-.32.28-.4.4-.2.279-.239.598-.239.957 0 0 0 .28.08.798.04.4.479 3.033.878 3.911.16.36.28.48.599.639.718.32 2.354.639 3.152.758.759.08 1.278.32 1.557-.279 0 0 .04-.16.12-.36a6.3 6.3 0 0 0 .28-1.915c0-.04.079-.04.079 0 0 .36-.08 1.557.838 1.876.36.12 1.118.24 1.876.32.678.079 1.197.358 1.197 2.114 0 1.078-.24 1.238-1.397 1.238-.958 0-1.317.04-1.317-.759 0-.598.599-.558 1.078-.558.2 0 .04-.16.04-.52 0-.398.24-.598 0-.598-1.557-.04-2.475 0-2.475 1.956 0 1.796.679 2.115 2.914 2.115 1.756 0 2.354-.04 3.073-2.275.16-.439.479-1.796.678-4.03.16-1.478-.12-5.788-.319-6.866zm-3.033 4.75c-.2 0-.32 0-.519.04h-.08s-.04 0-.04-.04v-.04c.08-.4.28-.878.878-.878.639.04.799.599.799 1.038v.04c0 .04-.04.04-.04.04-.04 0-.04 0-.04-.04-.28-.08-.599-.12-.958-.16z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_facebook .ya-share2__badge
+{
+    background-color: #3b5998;
+}
+
+.ya-share2__item_service_facebook .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.423 20v-7.298h2.464l.369-2.845h-2.832V8.042c0-.824.23-1.385 1.417-1.385h1.515V4.111A20.255 20.255 0 0 0 14.148 4c-2.183 0-3.678 1.326-3.678 3.76v2.097H8v2.845h2.47V20h2.953z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_gplus .ya-share2__badge
+{
+    background-color: #dc4e41;
+}
+
+.ya-share2__item_service_gplus .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.09 11.364v1.745h2.888c-.116.75-.873 2.196-2.887 2.196-1.738 0-3.156-1.44-3.156-3.214 0-1.775 1.418-3.215 3.156-3.215.989 0 1.65.422 2.029.786l1.382-1.331C11.615 7.5 10.465 7 9.09 7A5.087 5.087 0 0 0 4 12.09a5.087 5.087 0 0 0 5.09 5.092c2.94 0 4.888-2.066 4.888-4.975 0-.334-.036-.589-.08-.843H9.091zm10.91 0h-1.455V9.909h-1.454v1.455h-1.455v1.454h1.455v1.455h1.454v-1.455H20' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_linkedin .ya-share2__badge
+{
+    background-color: #0083be;
+}
+
+.ya-share2__item_service_linkedin .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.246 8.954h3.41v10.281h-3.41zm1.725-4.935c-1.167 0-1.929.769-1.929 1.776 0 .987.74 1.777 1.884 1.777h.022c1.19 0 1.93-.79 1.93-1.777-.023-1.007-.74-1.776-1.907-1.776zm10.052 4.715c-1.81 0-2.62.997-3.073 1.698V8.976H9.54c.045.965 0 10.281 0 10.281h3.41v-5.742c0-.307.022-.614.112-.834.246-.613.807-1.25 1.75-1.25 1.233 0 1.727.944 1.727 2.325v5.501h3.41v-5.896c0-3.158-1.683-4.627-3.926-4.627z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_lj .ya-share2__badge
+{
+    background-color: #0d425a;
+}
+
+.ya-share2__item_service_lj .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M17.815 13.3c.438 2.114.868 4.221 1.306 6.336.037.178-.148.385-.334.311-2.025-.741-4.006-1.49-6.01-2.24a.625.625 0 0 1-.318-.23l-7.39-8.903c-.067-.082-.082-.215-.06-.32.312-1.23.72-2.143 1.752-3.019C7.799 4.36 8.779 4.1 10.047 4.004c.156-.015.223.014.312.133 2.418 2.909 4.837 5.817 7.248 8.725a.888.888 0 0 1 .208.438z' fill='%23FFF'/%3E%3Cpath d='M6.175 8.462c.69-1.795 2.3-3.004 3.835-3.301l-.185-.223a4.242 4.242 0 0 0-3.85 3.272l.2.252z' fill='%230D425A'/%3E%3Cpath d='M10.53 5.792c-1.744.326-3.124 1.513-3.851 3.271l.905 1.091c.787-1.78 2.3-2.997 3.836-3.302l-.89-1.06zm2.76 7.827L9.364 8.9a6.119 6.119 0 0 0-1.269 1.87l4.89 5.89c.289-.385.867-2.359.303-3.041zM9.647 8.633l3.947 4.748c.445.542 2.456.327 3.086-.193l-4.756-5.72c-.793.156-1.587.564-2.277 1.165zm7.308 5.045c-.609.46-1.9.735-2.931.527.074.823-.096 1.892-.616 2.745l1.885.712 1.528.564c.223-.378.542-.608.913-.764l-.35-1.692-.43-2.092z' fill='%230D425A'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_moimir .ya-share2__badge
+{
+    background-color: #168de2;
+}
+
+.ya-share2__item_service_moimir .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.889 9.667a1.333 1.333 0 1 0 0-2.667 1.333 1.333 0 0 0 0 2.667zm6.222 0a1.333 1.333 0 1 0 0-2.667 1.333 1.333 0 0 0 0 2.667zm4.77 6.108l-1.802-3.028a.879.879 0 0 0-1.188-.307.843.843 0 0 0-.313 1.166l.214.36a6.71 6.71 0 0 1-4.795 1.996 6.711 6.711 0 0 1-4.792-1.992l.217-.364a.844.844 0 0 0-.313-1.166.878.878 0 0 0-1.189.307l-1.8 3.028a.844.844 0 0 0 .312 1.166.88.88 0 0 0 1.189-.307l.683-1.147a8.466 8.466 0 0 0 5.694 2.18 8.463 8.463 0 0 0 5.698-2.184l.685 1.151a.873.873 0 0 0 1.189.307.844.844 0 0 0 .312-1.166z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_odnoklassniki .ya-share2__badge
+{
+    background-color: #eb722e;
+}
+
+.ya-share2__item_service_odnoklassniki .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFF' fill-rule='evenodd'%3E%3Cpath d='M11.674 6.536a1.69 1.69 0 0 0-1.688 1.688c0 .93.757 1.687 1.688 1.687a1.69 1.69 0 0 0 1.688-1.687 1.69 1.69 0 0 0-1.688-1.688zm0 5.763a4.08 4.08 0 0 1-4.076-4.075 4.08 4.08 0 0 1 4.076-4.077 4.08 4.08 0 0 1 4.077 4.077 4.08 4.08 0 0 1-4.077 4.075zM10.025 15.624a7.633 7.633 0 0 1-2.367-.98 1.194 1.194 0 0 1 1.272-2.022 5.175 5.175 0 0 0 5.489 0 1.194 1.194 0 1 1 1.272 2.022 7.647 7.647 0 0 1-2.367.98l2.279 2.28a1.194 1.194 0 0 1-1.69 1.688l-2.238-2.24-2.24 2.24a1.193 1.193 0 1 1-1.689-1.689l2.279-2.279'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_pinterest .ya-share2__badge
+{
+    background-color: #c20724;
+}
+
+.ya-share2__item_service_pinterest .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9.742c0 1.58.599 2.986 1.884 3.51.21.087.4.003.46-.23.043-.16.144-.568.189-.738.06-.23.037-.31-.133-.512-.37-.436-.608-1.001-.608-1.802 0-2.322 1.74-4.402 4.53-4.402 2.471 0 3.829 1.508 3.829 3.522 0 2.65-1.174 4.887-2.917 4.887-.963 0-1.683-.795-1.452-1.77.276-1.165.812-2.421.812-3.262 0-.752-.405-1.38-1.24-1.38-.985 0-1.775 1.017-1.775 2.38 0 .867.293 1.454.293 1.454L8.69 16.406c-.352 1.487-.053 3.309-.028 3.492.015.11.155.136.22.054.09-.119 1.262-1.564 1.66-3.008.113-.409.647-2.526.647-2.526.32.61 1.254 1.145 2.248 1.145 2.957 0 4.964-2.693 4.964-6.298C18.4 6.539 16.089 4 12.576 4 8.204 4 6 7.13 6 9.742z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_pocket .ya-share2__badge
+{
+    background-color: #ee4056;
+}
+
+.ya-share2__item_service_pocket .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.9 5c1.159 0 2.1.948 2.1 2.117v5.862c0 .108-.008.215-.024.32.016.156.024.314.024.473 0 3.36-3.582 6.085-8 6.085s-8-2.724-8-6.085c0-.159.008-.317.024-.473a2.148 2.148 0 0 1-.024-.32V7.117C4 5.948 4.94 5 6.1 5h11.8zM8.596 9.392L12 12.795l3.404-3.403a1.063 1.063 0 0 1 1.502 1.502l-4.132 4.131c-.21.21-.486.314-.76.311-.284.01-.571-.094-.788-.31l-4.132-4.132a1.063 1.063 0 0 1 1.502-1.502z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_qzone .ya-share2__badge
+{
+    background-color: #f5b53c;
+}
+
+.ya-share2__item_service_qzone .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.367 14.463s-.105.148-.457.299l-.553.222.597 3.273c.062.282.25.983-.082 1.062-.17.04-.307-.067-.395-.121l-.769-.445-2.675-1.545c-.204-.122-.78-.546-1.093-.489-.205.038-.336.127-.483.216l-.77.445-2.39 1.386-.883.508c-.123.06-.301.058-.394-.025-.07-.063-.09-.253-.063-.388l.19-1.004.572-3.02c.047-.2.237-.975.166-1.137-.048-.107-.173-.196-.261-.267l-.61-.565-2.13-1.983c-.189-.153-.345-.345-.533-.496l-.235-.216c-.062-.078-.165-.235-.09-.369.142-.248.974-.218 1.335-.28l2.682-.31.82-.09c.146-.024.299-.004.413-.063.239-.123.51-.809.636-1.087l1.31-2.714c.151-.297.286-.603.431-.896.075-.15.133-.308.305-.356.162-.045.257.105.312.178.177.235.325.685.451.973l1.29 2.853c.104.238.363.964.54 1.074.266.166.858.108 1.227.172l2.841.292c.355.062 1.245.01 1.36.267.076.17-.072.314-.152.394l-.864.814-1.983 1.868c-.185.164-.77.637-.833.858-.04.14.02.414.088.722-.096-.001-.39-.007-1.182-.029-.63-.007-2.616-.17-2.713-.178l-.84-.076c-.14-.023-.326.012-.4-.076v-.02c1.727-1.168 3.407-2.416 5.142-3.578l-.006-.044c-.146-.072-.359-.059-.54-.095-.385-.077-.79-.078-1.208-.147-.75-.124-1.59-.114-2.434-.114-1.172 0-2.329.03-3.35.21-.45.079-.894.095-1.309.197-.172.042-.358.03-.49.108l.007.012c.1.027.253.02.381.02l.928.019.808.025.813.032.591.032c.486.075 1.007.036 1.475.114.404.068.804.065 1.182.14.113.022.245.015.33.064v.006c-.039.094-.336.255-.432.318l-1.055.743-2.256 1.62-1.417.992c.003.048.024.035.045.061 1.15.167 2.52.258 3.77.262 1.298.005 2.465-.094 3.118-.193.561-.086 1.082-.147 1.653-.287.325-.08.521-.148.521-.148z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_reddit .ya-share2__badge
+{
+    background-color: #ff4500;
+}
+
+.ya-share2__item_service_reddit .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.542 10.63c-1.105-.636-2.494-1.033-4.025-1.118l.808-2.393 2.182.637c0 .963.78 1.742 1.743 1.742.964 0 1.758-.779 1.758-1.742C19.008 6.78 18.214 6 17.25 6c-.609 0-1.148.326-1.459.793l-2.65-.764a.482.482 0 0 0-.61.311l-1.063 3.172c-1.516.085-2.905.482-4.01 1.119a1.987 1.987 0 0 0-1.46-.623A1.995 1.995 0 0 0 4 12.004c0 .75.425 1.403 1.035 1.742-.029.17-.043.34-.043.51 0 2.62 3.146 4.744 7.015 4.744 3.855 0 7-2.124 7-4.744 0-.17-.013-.34-.042-.51A1.974 1.974 0 0 0 20 12.004a1.995 1.995 0 0 0-1.998-1.996c-.581 0-1.091.24-1.46.623zM9.499 12.5a1.01 1.01 0 0 1 1.006 1.006.998.998 0 0 1-1.006.991.986.986 0 0 1-.992-.991c0-.553.439-1.006.992-1.006zm5.002 0a.998.998 0 0 0-.992 1.006c0 .552.44.991.992.991a.998.998 0 0 0 1.006-.991 1.01 1.01 0 0 0-1.006-1.006zm-5.3 3.597a.484.484 0 0 1-.085-.694c.156-.226.482-.255.694-.085.567.44 1.474.68 2.197.68.709 0 1.616-.24 2.197-.68a.484.484 0 0 1 .694.085.496.496 0 0 1-.085.694c-.737.58-1.885.907-2.806.907-.935 0-2.07-.326-2.806-.907zm8.05-7.59c-.411 0-.752-.34-.752-.75 0-.426.34-.752.751-.752s.752.326.752.751c0 .41-.34.75-.752.75z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_renren .ya-share2__badge
+{
+    background-color: #1760a7;
+}
+
+.ya-share2__item_service_renren .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.019 15.562l-.001-.003-.018.002a.055.055 0 0 0 .019.001zM7.71 12.398l.146-.68c.048-.205.03-.452.03-.692V9.812L7.88 8c-.139 0-.278.043-.393.076-.358.102-.666.201-.962.352-1.158.59-2.022 1.565-2.387 2.944-.343 1.297-.007 2.652.522 3.507.118.19.269.48.44.61.135-.02.272-.15.375-.217a6.06 6.06 0 0 0 .622-.452l.24-.229c.63-.506 1.075-1.346 1.373-2.193zm4.276 3.164h.02a.382.382 0 0 0-.019-.003v.003zm-3.01-.888l-.258-.575-.088-.264H8.62l-.264.498c-.176.288-.358.574-.557.839a6.5 6.5 0 0 1-.85.944l-.517.422.012.024.287.14c.206.091.43.173.657.235.788.217 1.811.177 2.545-.053.178-.055.643-.194.739-.305v-.017c-.177-.092-.324-.254-.47-.381a5.573 5.573 0 0 1-1.225-1.507zm10.884-3.302c-.365-1.379-1.23-2.354-2.387-2.944-.296-.15-.604-.25-.962-.352-.115-.033-.254-.077-.393-.076l-.005 1.812v1.214c0 .24-.019.487.029.692l.147.68c.297.847.741 1.687 1.372 2.193l.24.23c.196.164.402.309.622.45.103.067.24.198.375.218.171-.13.322-.42.44-.61.529-.855.865-2.21.522-3.507zm-3.66 3.8c-.2-.265-.381-.55-.557-.839l-.264-.498h-.011l-.088.264-.258.575a5.576 5.576 0 0 1-1.226 1.507c-.145.127-.292.29-.469.38v.018c.096.111.561.25.739.305.734.23 1.757.27 2.545.053a4.85 4.85 0 0 0 .657-.234l.287-.141a1.31 1.31 0 0 0 .012-.024l-.516-.422a6.5 6.5 0 0 1-.85-.944zm-1.653-2.727c.068-.192.097-.402.146-.61.05-.21.024-.484.024-.727V9.753l-.006-1.741c-.015-.008-.02-.01-.047-.012-.197.047-.326.05-.592.14-.357.102-.685.275-.985.44-.289.16-.53.388-.78.587-.097.077-.199.19-.308.312l.01.01a1.19 1.19 0 0 0-.01.012l.36.47c.232.359.445.763.581 1.213.326 1.079.182 2.411-.235 3.273a4.9 4.9 0 0 1-.445.75l-.258.323a.018.018 0 0 1-.003.007c.004.007.01.016.012.022h.008c.395-.215.686-.574 1.027-.844.189-.15.354-.35.504-.54.404-.514.755-1.046.997-1.73zm-2.55 3.085l-.259-.323a4.903 4.903 0 0 1-.445-.75c-.417-.862-.561-2.194-.235-3.273.136-.45.35-.854.58-1.214L12 9.501l-.01-.011.01-.01a2.791 2.791 0 0 0-.308-.313c-.25-.2-.491-.427-.78-.586-.3-.166-.628-.339-.985-.44-.266-.09-.395-.094-.592-.141-.026.001-.032.004-.047.012l-.006 1.741v1.355c0 .243-.026.517.024.727.049.208.078.418.146.61.242.684.593 1.216.997 1.73.15.19.315.39.505.54.34.27.63.629 1.026.844h.008c.001-.006.008-.015.012-.022a.019.019 0 0 1-.003-.007z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_sinaWeibo .ya-share2__badge
+{
+    background-color: #c53220;
+}
+
+.ya-share2__item_service_sinaWeibo .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ctitle%3EsinaWeibo%3C/title%3E%3Cpath d='M10.266 14.696c-.103.421.55.447.64.063.037-.191-.103-.332-.282-.332-.167 0-.333.128-.358.269zm-.128.945c.102-.498-.307-.869-.793-.843-.46.038-.843.358-.92.754-.115.511.307.882.793.844.46-.026.843-.345.92-.755zm3.797-3.157c-1.586-.997-3.707-1.01-5.42-.447-.857.28-1.764.818-2.301 1.495-.627.793-.882 1.815-.23 2.8.958 1.431 3.413 2.033 5.675 1.508 1.33-.307 2.749-1.048 3.35-2.326.562-1.177-.052-2.378-1.074-3.03zm-3.17.498c.945.167 1.7.755 1.827 1.739.243 1.854-2.173 3.336-4.026 2.327a1.933 1.933 0 0 1-.742-2.723c.435-.767 1.266-1.266 2.148-1.355a2.75 2.75 0 0 1 .793.012zm6.11-.37c-.268-.18-.538-.281-.856-.383-.308-.103-.359-.154-.243-.46.076-.218.14-.41.166-.666.14-1.15-.793-1.495-1.854-1.406-.498.039-.92.167-1.355.307-.281.09-.806.384-.92.205-.064-.09.013-.23.038-.32.166-.626.23-1.496-.384-1.88-.447-.28-1.227-.204-1.7-.038-2.556.87-6.455 4.552-5.663 7.479.18.664.55 1.163.908 1.521 1.061 1.061 2.71 1.65 4.231 1.866 1.112.154 2.263.14 3.375-.064 1.815-.332 3.554-1.15 4.679-2.607.754-.972.997-2.352 0-3.235a3.334 3.334 0 0 0-.422-.319zm1.623-3.682c.652 1.483-.064 2.148.166 2.66.192.421.767.46 1.023.14.191-.243.294-.959.307-1.278a4.193 4.193 0 0 0-1.125-3.12c-.984-1.073-2.276-1.444-3.694-1.303-.256.025-.46.064-.601.217-.332.358-.166.882.294.959.384.063 1.342-.23 2.416.396.498.307.971.792 1.214 1.33zm-3.45-.562c-.282.345-.078.87.408.856.294-.012.358-.05.677.051.307.103.626.448.64.857.025.268-.282.895.32 1.061a.523.523 0 0 0 .536-.166c.115-.128.166-.371.192-.575.089-.857-.333-1.598-1.01-2.02-.384-.23-1.445-.46-1.764-.064z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_skype .ya-share2__badge
+{
+    background-color: #00aff0;
+}
+
+.ya-share2__item_service_skype .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19.537 13.698c.115-.52.176-1.06.176-1.614 0-4.155-3.415-7.524-7.63-7.524-.444 0-.88.038-1.304.11A4.444 4.444 0 0 0 8.425 4C5.981 4 4 5.954 4 8.364c0 .805.222 1.56.608 2.207a7.428 7.428 0 0 0-.155 1.513c0 4.156 3.416 7.4 7.63 7.4.477 0 .944-.044 1.397-.126.623.33 1.335.642 2.092.642 2.444 0 4.425-1.953 4.425-4.364 0-.695-.166-1.354-.46-1.938zm-3.974 1.457c-.294.418-.725.747-1.293.984-.567.238-1.239.356-2.016.356-.933 0-1.702-.162-2.308-.486a2.986 2.986 0 0 1-1.047-.934c-.268-.39-.403-.768-.403-1.137 0-.213.08-.395.242-.547a.855.855 0 0 1 .615-.229c.202 0 .373.059.512.178.14.119.26.294.358.527.12.278.25.51.39.695.139.185.336.34.589.46.254.12.587.18 1 .18.566 0 1.027-.12 1.382-.364.354-.243.532-.547.532-.91a.919.919 0 0 0-.287-.702 1.88 1.88 0 0 0-.741-.412 13.21 13.21 0 0 0-1.216-.303c-.678-.146-1.247-.318-1.703-.513-.458-.196-.822-.463-1.09-.8-.269-.34-.403-.759-.403-1.26 0-.48.142-.904.426-1.275.283-.372.693-.658 1.23-.858.537-.2 1.17-.299 1.895-.299.58 0 1.082.066 1.505.198.423.133.774.309 1.053.528.28.22.484.45.612.691.13.24.194.477.194.705 0 .21-.08.4-.241.567a.8.8 0 0 1-.603.252c-.22 0-.386-.05-.5-.151-.114-.101-.237-.266-.37-.495a2.27 2.27 0 0 0-.618-.768c-.241-.184-.627-.276-1.16-.276-.494 0-.893.1-1.196.3-.303.199-.455.44-.455.72 0 .173.053.324.155.45.103.128.245.235.426.326.18.091.363.162.547.214.185.052.49.126.916.225a15.47 15.47 0 0 1 1.446.38c.432.138.8.307 1.103.503.302.198.54.45.709.752.17.302.255.673.255 1.111 0 .525-.148.998-.442 1.417z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_surfingbird .ya-share2__badge
+{
+    background-color: #30baff;
+}
+
+.ya-share2__item_service_surfingbird .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.315 8.49l-.214 1.987-3.436 3.382h-1.826l-.698 1.826v2.523l-2.47-.698 2.846-5.1L4 8.167l5.638.752L6.899 5l7.463 4.027 2.202-2.47h1.02L20 7.631z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_telegram .ya-share2__badge
+{
+    background-color: #64a9dc;
+}
+
+.ya-share2__item_service_telegram .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18.92 6.089L4.747 11.555c-.967.388-.962.928-.176 1.168l3.534 1.104 1.353 4.146c.164.454.083.634.56.634.368 0 .53-.168.736-.368.13-.127.903-.88 1.767-1.719l3.677 2.717c.676.373 1.165.18 1.333-.628l2.414-11.374c.247-.99-.378-1.44-1.025-1.146zM8.66 13.573l7.967-5.026c.398-.242.763-.112.463.154l-6.822 6.155-.265 2.833-1.343-4.116z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_tencentWeibo .ya-share2__badge
+{
+    background-color: #53a9d7;
+}
+
+.ya-share2__item_service_tencentWeibo .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.813 6.01a4.397 4.397 0 0 0-4.326 6.121c.087.199.312.29.511.2a.382.382 0 0 0 .206-.51 3.566 3.566 0 0 1-.286-1.668A3.616 3.616 0 0 1 8.76 6.79a3.615 3.615 0 0 1 3.366 3.84 3.615 3.615 0 0 1-4.65 3.218.39.39 0 0 0-.486.263.394.394 0 0 0 .262.485c.315.093.647.152.977.174a4.397 4.397 0 0 0 4.677-4.087A4.398 4.398 0 0 0 8.813 6.01zm-1.348 5.658a1.67 1.67 0 1 0-.46-.655c-.274.27-.565.59-.854.966-1.022 1.315-2.224 3.694-2.148 7.007.006.204.157.484.355.497l.04.002c.213.015.394-.301.391-.516-.064-2.458.6-4.662 1.955-6.423.242-.316.488-.626.72-.878zm12.388 4.106c-1.307-.48-2.302-1.27-2.95-2.352a4.873 4.873 0 0 1-.354-.71.819.819 0 0 0 .337-.36.829.829 0 0 0-.395-1.098.822.822 0 0 0-1.098.392.822.822 0 0 0 .724 1.177c.091.237.218.516.39.81.483.812 1.431 1.912 3.196 2.558a.226.226 0 0 0 .278-.113c0-.006.005-.01.007-.022a.224.224 0 0 0-.135-.282zm-3.767-1.676a2.04 2.04 0 0 1-1.707-3.042 2.039 2.039 0 0 1 2.784-.787 2.04 2.04 0 0 1 .786 2.783 1.92 1.92 0 0 1-.268.378.223.223 0 0 0 .014.314c.09.082.234.074.313-.016a2.489 2.489 0 1 0-4.017-2.89 2.493 2.493 0 0 0 2.08 3.708.224.224 0 0 0 .015-.448z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_tumblr .ya-share2__badge
+{
+    background-color: #547093;
+}
+
+.ya-share2__item_service_tumblr .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.72 7.7h3.699v2.857h-3.7v4.102c0 .928-.01 1.463.087 1.726.098.262.343.534.61.69.355.213.758.32 1.214.32.81 0 1.616-.264 2.417-.79v2.522c-.683.322-1.302.55-1.857.678a7.94 7.94 0 0 1-1.798.195 4.905 4.905 0 0 1-1.724-.276 4.215 4.215 0 0 1-1.438-.79c-.399-.343-.673-.706-.826-1.09-.154-.386-.23-.945-.23-1.676v-5.611H7V8.29c.628-.203 1.357-.496 1.804-.877.45-.382.809-.84 1.08-1.374.272-.534.459-1.214.56-2.039h2.276v3.7z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_twitter .ya-share2__badge
+{
+    background-color: #00aced;
+}
+
+.ya-share2__item_service_twitter .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 7.539a6.56 6.56 0 0 1-1.885.517 3.294 3.294 0 0 0 1.443-1.816 6.575 6.575 0 0 1-2.085.796 3.283 3.283 0 0 0-5.593 2.994A9.32 9.32 0 0 1 5.114 6.6a3.28 3.28 0 0 0 1.016 4.382 3.274 3.274 0 0 1-1.487-.41v.041a3.285 3.285 0 0 0 2.633 3.218 3.305 3.305 0 0 1-1.482.056 3.286 3.286 0 0 0 3.066 2.28A6.585 6.585 0 0 1 4 17.524 9.291 9.291 0 0 0 9.032 19c6.038 0 9.34-5 9.34-9.337 0-.143-.004-.285-.01-.425A6.672 6.672 0 0 0 20 7.538z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_viber .ya-share2__badge
+{
+    background-color: #7b519d;
+}
+
+.ya-share2__item_service_viber .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFF' fill-rule='evenodd'%3E%3Cpath d='M18.434 15.574c-.484-.391-1.002-.743-1.511-1.102-1.016-.718-1.945-.773-2.703.38-.426.648-1.021.677-1.644.392-1.718-.782-3.044-1.989-3.821-3.743-.344-.777-.34-1.473.465-2.022.425-.29.854-.634.82-1.268-.045-.828-2.043-3.593-2.832-3.885a1.429 1.429 0 0 0-.984 0C4.373 4.95 3.606 6.48 4.34 8.292c2.19 5.405 6.043 9.167 11.349 11.463.302.13.638.183.808.23 1.208.012 2.623-1.158 3.032-2.318.393-1.117-.438-1.56-1.096-2.093zM12.485 4.88c3.879.6 5.668 2.454 6.162 6.38.045.363-.09.909.426.919.538.01.408-.528.413-.89.045-3.699-3.163-7.127-6.888-7.253-.281.04-.863-.195-.9.438-.024.427.466.357.787.406z'/%3E%3Cpath d='M13.244 5.957c-.373-.045-.865-.222-.953.299-.09.546.458.49.811.57 2.395.538 3.23 1.414 3.624 3.802.057.349-.057.89.532.8.436-.066.278-.53.315-.802.02-2.293-1.936-4.38-4.329-4.669z'/%3E%3Cpath d='M13.464 7.832c-.249.006-.493.033-.585.3-.137.4.152.496.446.544.983.158 1.5.74 1.598 1.725.027.268.195.484.452.454.356-.043.389-.361.378-.664.017-1.106-1.227-2.385-2.289-2.359z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_vkontakte .ya-share2__badge
+{
+    background-color: #48729e;
+}
+
+.ya-share2__item_service_vkontakte .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.576-1.496c.588-.19 1.341 1.26 2.14 1.818.605.422 1.064.33 1.064.33l2.137-.03s1.117-.071.587-.964c-.043-.073-.308-.661-1.588-1.87-1.34-1.264-1.16-1.059.453-3.246.983-1.332 1.376-2.145 1.253-2.493-.117-.332-.84-.244-.84-.244l-2.406.015s-.178-.025-.31.056c-.13.079-.212.262-.212.262s-.382 1.03-.89 1.907c-1.07 1.85-1.499 1.948-1.674 1.832-.407-.267-.305-1.075-.305-1.648 0-1.793.267-2.54-.521-2.733-.262-.065-.454-.107-1.123-.114-.858-.009-1.585.003-1.996.208-.274.136-.485.44-.356.457.159.022.519.099.71.363.246.341.237 1.107.237 1.107s.142 2.11-.33 2.371c-.325.18-.77-.187-1.725-1.865-.489-.859-.859-1.81-.859-1.81s-.07-.176-.198-.272c-.154-.115-.37-.151-.37-.151l-2.286.015s-.343.01-.469.161C3.94 7.721 4.043 8 4.043 8s1.79 4.258 3.817 6.403c1.858 1.967 3.968 1.838 3.968 1.838h.957z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.ya-share2__item_service_whatsapp .ya-share2__badge
+{
+    background-color: #65bc54;
+}
+
+.ya-share2__item_service_whatsapp .ya-share2__icon
+{
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 11.794c0 4.304-3.517 7.794-7.855 7.794a7.87 7.87 0 0 1-3.796-.97L4 20l1.418-4.182a7.714 7.714 0 0 1-1.127-4.024C4.29 7.489 7.807 4 12.145 4S20 7.49 20 11.794zm-7.855-6.553c-3.641 0-6.603 2.94-6.603 6.553 0 1.434.467 2.762 1.258 3.842l-.825 2.433 2.537-.806a6.6 6.6 0 0 0 3.633 1.084c3.642 0 6.604-2.94 6.604-6.553s-2.962-6.553-6.604-6.553zm3.967 8.348c-.049-.08-.177-.128-.37-.223-.192-.095-1.139-.558-1.315-.621-.177-.064-.305-.096-.434.095a10.92 10.92 0 0 1-.61.749c-.112.128-.224.143-.416.048-.193-.096-.813-.297-1.549-.948a5.76 5.76 0 0 1-1.07-1.323c-.113-.191-.013-.295.084-.39.086-.086.192-.223.289-.334.096-.112.128-.191.192-.319s.032-.239-.016-.335c-.048-.095-.433-1.035-.594-1.418-.16-.382-.32-.318-.433-.318-.112 0-.24-.016-.369-.016a.71.71 0 0 0-.513.239c-.177.19-.674.653-.674 1.593s.69 1.848.786 1.976c.096.127 1.332 2.119 3.289 2.884 1.958.764 1.958.51 2.31.477.353-.031 1.14-.461 1.3-.908.16-.446.16-.829.113-.908z' fill='%23FFF' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+</style><link rel="stylesheet" type="text/css" id="u0" href="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/skin.css"></head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48914068-1', 'prog-cpp.ru');
+  ga('send', 'pageview');
+  setTimeout(function(){
+  ga('send', 'event', 'New Visitor', location.pathname);
+  }, 15000);
+
+</script>
+<div class="head-wrapper">
+	<div class="head">
+		<div class="head-logo">
+		<a href="https://prog-cpp.ru/"><img src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/cpplogo160.png" alt="Программирование и алгоритмизация"></a>
+			<div class="head-logo-name">
+				<div class="head-name"><a href="https://prog-cpp.ru/">Программирование</a></div>
+					<form method="get" id="searchform" action="https://prog-cpp.ru/">
+						<input class="field" name="s" id="s" placeholder="Искать" type="text">
+						<input class="submit" name="submit" id="searchsubmit" value="Поиск" type="submit">
+					</form>
+			</div>	
+		</div>
+	</div>
+</div>
+<div class="menu-wrapper">
+	<div class="menu-main">
+		<div class="menu-pull">
+			<a id="pull" href="#">Меню</a>
+			<div class="menuf"><div class="menu-%d1%81%d1%82%d1%80%d0%b0%d0%bd%d0%b8%d1%86%d1%8b-container"><ul id="menu-%d1%81%d1%82%d1%80%d0%b0%d0%bd%d0%b8%d1%86%d1%8b" class="menu"><li id="menu-item-284" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-284"><a href="https://prog-cpp.ru/">Главная</a></li>
+<li id="menu-item-739" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-739"><a href="https://prog-cpp.ru/download/">Скачать</a></li>
+<li id="menu-item-2492" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2492"><a href="https://prog-cpp.ru/about/">Об авторе</a></li>
+<li id="menu-item-282" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-282"><a href="https://prog-cpp.ru/contacts/">Контакты</a></li>
+<li id="menu-item-283" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-283"><a href="https://prog-cpp.ru/sitemap/">Карта сайта</a></li>
+</ul></div></div>		</div>
+		<ul class="ico-social">
+			<li><a href="https://vk.com/progcpp" target="_blank"><img src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/vk.png" alt="Вконтакте"></a></li>
+			<li><a href="https://www.facebook.com/elena.vstavskaya" target="_blank"><img src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/facebook.png" alt="Facebook"></a></li>
+			<li><a href="https://plus.google.com/u/0/communities/102458218858588097327" rel="author" target="_blank"><img src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/google.png" alt="Google"></a></li>
+			<li><a href="https://www.youtube.com/c/ElenaVstavskaya" target="_blank"><img src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/yt.png" alt="YouTube"></a></li>
+			<li><a href="https://feeds.feedburner.com/prog-cpp/SOIE" target="_blank"><img src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/rss.png" alt="RSS"></a></li>
+		</ul>
+	</div>
+</div><div class="content-wrapper">
+	<div class="content-main">
+		<div class="content">
+			<div class="content-article" itemscope="" itemtype="https://schema.org/Article">
+				<h1 itemprop="headline">Создание проекта на языке ассемблера в Microsoft Visual Studio Express 2010</h1>
+				<meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://prog-cpp.ru/asm-vs/" content="">
+				<div class="bread"><span itemprop="articleSection">
+				<a href="https://prog-cpp.ru/category/assembler/" rel="category tag">Язык ассемблера</a></span> / Создание проекта на языке ассемблера в Microsoft Visual Studio Express 2010</div>
+				<div itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+					<meta itemprop="name" content="Елена Вставская">
+  				</div>
+				<meta itemprop="datePublished dateModified" content="2014-06-22">
+				<div itemprop="image" itemscope="" itemtype="https://schema.org/ImageObject" class="aauthor">
+      						<img itemprop="contentUrl url" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/cpplogo250.png" alt="">
+      						<meta itemprop="width" content="250">
+      						<meta itemprop="height" content="250">
+				</div>
+				<div class="google-adsence">
+				<script async="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/adsbygoogle.js"></script>
+				<!-- progcpp2 -->
+				<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3592083948335083" data-ad-slot="9684020850" data-ad-format="auto">
+				</ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+				</div>
+				<div class="article" itemprop="articleBody"><br>&nbsp;<p>Создание проекта <span style="color: #800000;"><a title="Создание консольного приложения Visual Studio" href="https://prog-cpp.ru/vs-console/" target="_blank"><span style="color: #800000;">консольного</span></a></span> или <span style="color: #800000;"><a title="Создание диалогового / оконного приложения Visual Studio" href="https://prog-cpp.ru/vs-win/" target="_blank"><span style="color: #800000;">оконного</span></a></span> Windows-приложения не отличается от рассмотренного для языков программирования Си и C++.<span id="more-597"></span></p>
+<p>После того, как в Visual Studio появилось окно проекта (в левой части появившегося окна отображается <strong>Обозреватель решений</strong>), для добавления нового файла программы в проект выбираем по правой кнопке мыши на папке <strong>Файлы исходного кода</strong> меню <strong>Добавить-&gt;Создать элемент</strong>.<br>
+<img itemprop="image" class="aligncenter size-full wp-image-263" alt="Microsoft Bisual Studio" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/vs5.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/04/vs5.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/04/vs5-300x197.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="441" width="670">В появившемся окне выбираем <strong>Файл C++ (.cpp)</strong>, задаем имя файла и вручную добавляем к нему расширение <strong>asm</strong>. Нажимаем кнопку <strong>Добавить</strong>.<br>
+<img itemprop="image" class="aligncenter size-full wp-image-599" alt="Проект на языке ассемблера в Visual Studio" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs11.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs11.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs11-300x208.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="465" width="670"></p>
+<p>В появившемся окне набираем текст программы. В качестве примера можно использовать следующий текст:</p>
+<div class="prog">.686P<br>
+.MODEL FLAT, STDCALL<br>
+.STACK 4096<br>
+.DATA<br>
+MB_OK &nbsp;&nbsp; EQU 0<br>
+STR1&nbsp;&nbsp;&nbsp;&nbsp; DB "Моя первая программа",0<br>
+STR2&nbsp;&nbsp;&nbsp;&nbsp; DB "Привет всем!",0<br>
+HW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DD ?<br>
+EXTERN MessageBoxA@16:NEAR<br>
+.CODE<br>
+START:<br>
+PUSH&nbsp;&nbsp;&nbsp;&nbsp; MB_OK<br>
+PUSH&nbsp;&nbsp;&nbsp;&nbsp; OFFSET STR1<br>
+PUSH&nbsp;&nbsp;&nbsp;&nbsp; OFFSET STR2<br>
+PUSH&nbsp;&nbsp;&nbsp;&nbsp; HW<br>
+CALL&nbsp;&nbsp;&nbsp;&nbsp; MessageBoxA@16<br>
+RET<br>
+END START</div>
+<p><img itemprop="image" class="aligncenter size-full wp-image-600" alt="Добавление" исходного="" кода="" ассемблера"="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs2.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs2.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs2-300x197.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="441" width="670"></p>
+<p>Далее необходимо сообщить среде разработки, что данный файл является 
+программой на языке ассемблера, и для корректного включения его в проект
+ требуется использовать Microsoft Macro Assembler. Для этого выбираем 
+для проекта (по правой клавише мыши) опцию <strong>Настройки построения</strong>.</p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-601" alt="Настройки построения" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs3.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs3.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs3-300x198.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="443" width="670"></p>
+<p>В появившемся окне ставим галочку для <strong>masm</strong> (Microsoft Macro Assembler) и нажимаем <strong>OK</strong>.<br>
+<img itemprop="image" class="aligncenter size-full wp-image-602" alt="Microsoft Macro Assembler" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs4.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs4.png 530w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs4-300x170.png 300w" sizes="(max-width: 530px) 100vw, 530px" height="301" width="530">Теперь
+ нужно проверить, что для файла на языке ассемблера установился 
+соответствующий инструмент сборки. По правой кнопке мыши для файла с 
+расширением .asm выбираем опцию <strong>Свойства</strong>.</p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-603" alt="Свойства проекта" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs5.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs5.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs5-300x197.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="440" width="670">В появившемся окне для выбранного файла отмечаем инструмент сборки <strong>Microsoft Macro Assembler</strong>.</p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-604" alt="Инструмент сборки" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs6.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs6.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs6-300x212.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="474" width="670">Для построения проекта выбираем меню <strong>Отладка-&gt;Построить решение</strong>.</p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-605" alt="Построить решение" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs7.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs7.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs7-300x197.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="441" width="670">В случае успешного построения в нижней части окна отображается <strong>Построение: успешно 1</strong>.</p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-606" alt="Построить решение" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs8.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs8.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs8-300x197.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="441" width="670"></p>
+<p>Для запуска приложения выбираем меню <strong>Отладка-&gt;Начать отладку</strong>.</p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-607" alt="Запуск приложения на выполнение" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs9.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs9.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs9-300x198.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="443" width="670"></p>
+<p>Результат выполнения программы:<br>
+<img itemprop="image" class="aligncenter size-full wp-image-608" alt="Результат выполнения" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs10.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs10.png 530w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs10-300x151.png 300w" sizes="(max-width: 530px) 100vw, 530px" height="268" width="530"></p>
+<h5>Изменить тип приложения с консольного на оконное</h5>
+<p>Чтобы убрать консоль (поменять тип приложения с консольного на 
+оконное, или наоборот) необходимо обратиться к меню Свойства проекта, 
+вызванного по правой кнопке мыши.<br>
+<img itemprop="image" class="aligncenter size-full wp-image-609" alt="Изменение платформы приложения" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs111.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs111.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs111-300x197.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="440" width="670">В появившемся окне выбрать раздел <strong>Компоновщик-&gt;Система</strong>, и в разделе <strong>Подсистема</strong> поменять тип с <strong>Консоль</strong> на <strong>Windows</strong> (или наоборот).</p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-610" alt="Выбор консольного или оконного приложения" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs12.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs12.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs12-300x212.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="475" width="670"></p>
+<p>Повторная сборка и запуск программы на выполнения выдадут следующий результат (консоли нет):<br>
+<img itemprop="image" class="aligncenter size-full wp-image-611" alt="Запуск оконного приложения" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs13.png" height="168" width="204"></p>
+<h5>Подсветка синтаксиса языка ассемблера</h5>
+<p>Для того, чтобы включить подсветку синтаксиса языка ассемблера в Microsoft Visual Studio Express 2010 необходимо загрузить файл <span style="color: #800000;"><a href="https://prog-cpp.ru/wp-content/uploads/2014/06/usertype.rar"><span style="color: #800000;">usertype</span></a></span> и распаковать его в папку</p>
+<p><strong>C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE</strong></p>
+<p>Для подключения подсветки синтаксиса выбираем меню&nbsp;<strong>Сервис-&gt;Параметры</strong></p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-613" alt="Подсветка синтаксиса ассемблера" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs14.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs14.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs14-300x198.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="443" width="670">В появившемся окне выбрать <strong>Текстовый редактор-&gt;Расширение файла</strong> и вручную добавляем расширение <strong>asm</strong>. Нажимаем кнопку <strong>Добавить</strong>, затем - <strong>OK</strong>.</p>
+<p><img itemprop="image" class="aligncenter size-full wp-image-614" alt="Добавление расширения файла asm" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs15.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs15.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs15-300x197.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="441" width="670"><img itemprop="image" class="aligncenter size-full wp-image-615" alt="Расширение файла asm" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/asmvs16.png" srcset="https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs16.png 670w, https://prog-cpp.ru/wp-content/uploads/2014/06/asmvs16-300x174.png 300w" sizes="(max-width: 670px) 100vw, 670px" height="389" width="670">После перезапуска Microsoft&nbsp; Visual Studio Express 2010 подсветка синтаксиса языка ассемблера будет активна.</p>
+<p><a title="Язык ассемблера" href="https://prog-cpp.ru/asm/"><em>Назад</em></a></p>
+<br>Назад: <em><a href="https://prog-cpp.ru/category/assembler/" rel="category tag">Язык ассемблера</a></em>
+				<div style="float:right" class="ya-share2 ya-share2_inited" data-services="vkontakte,facebook,gplus,twitter,linkedin,telegram"><div class="ya-share2__container ya-share2__container_size_m"><ul class="ya-share2__list ya-share2__list_direction_horizontal"><li class="ya-share2__item ya-share2__item_service_vkontakte"><a class="ya-share2__link" href="https://vk.com/share.php?url=https%3A%2F%2Fprog-cpp.ru%2Fasm-vs%2F&amp;title=%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010&amp;description=&amp;image=&amp;utm_source=share2" rel="nofollow noopener" target="_blank" title="ВКонтакте"><span class="ya-share2__badge"><span class="ya-share2__icon"></span><span class="ya-share2__counter"></span></span><span class="ya-share2__title">ВКонтакте</span></a></li><li class="ya-share2__item ya-share2__item_service_facebook"><a class="ya-share2__link" href="https://www.facebook.com/sharer.php?src=sp&amp;u=https%3A%2F%2Fprog-cpp.ru%2Fasm-vs%2F&amp;title=%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010&amp;description=&amp;picture=&amp;utm_source=share2" rel="nofollow noopener" target="_blank" title="Facebook"><span class="ya-share2__badge"><span class="ya-share2__icon"></span><span class="ya-share2__counter"></span></span><span class="ya-share2__title">Facebook</span></a></li><li class="ya-share2__item ya-share2__item_service_gplus"><a class="ya-share2__link" href="https://plus.google.com/share?url=https%3A%2F%2Fprog-cpp.ru%2Fasm-vs%2F&amp;utm_source=share2" rel="nofollow noopener" target="_blank" title="Google+"><span class="ya-share2__badge"><span class="ya-share2__icon"></span><span class="ya-share2__counter"></span></span><span class="ya-share2__title">Google+</span></a></li><li class="ya-share2__item ya-share2__item_service_twitter"><a class="ya-share2__link" href="https://twitter.com/intent/tweet?text=%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010&amp;url=https%3A%2F%2Fprog-cpp.ru%2Fasm-vs%2F&amp;hashtags=&amp;utm_source=share2" rel="nofollow noopener" target="_blank" title="Twitter"><span class="ya-share2__badge"><span class="ya-share2__icon"></span></span><span class="ya-share2__title">Twitter</span></a></li><li class="ya-share2__item ya-share2__item_service_linkedin"><a class="ya-share2__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fprog-cpp.ru%2Fasm-vs%2F&amp;title=%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010&amp;summary=&amp;utm_source=share2" rel="nofollow noopener" target="_blank" title="LinkedIn"><span class="ya-share2__badge"><span class="ya-share2__icon"></span><span class="ya-share2__counter"></span></span><span class="ya-share2__title">LinkedIn</span></a></li><li class="ya-share2__item ya-share2__item_service_telegram"><a class="ya-share2__link" href="https://telegram.me/share/url?url=https%3A%2F%2Fprog-cpp.ru%2Fasm-vs%2F&amp;text=%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010&amp;utm_source=share2" rel="nofollow noopener" target="_blank" title="telegram"><span class="ya-share2__badge"><span class="ya-share2__icon"></span></span><span class="ya-share2__title">telegram</span></a></li></ul></div></div>
+				</div>
+			</div>
+			<div class="comments" id="comments" itemscope="" itemtype="https://schema.org/Comment">
+	<h4>Комментариев к записи: <span itemprop="commentCount">15</span></h4>
+
+		
+	<ul class="commentlist">
+		<li class="comment" id="li-comment-507">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-507" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/d90be463fa968dd3cf4fdbc142cff2ac.jpg" srcset="https://secure.gravatar.com/avatar/d90be463fa968dd3cf4fdbc142cff2ac?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Олег</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-507"><time datetime="2016-02-03T21:16:59+00:00"><span itemprop="commentTime">2016-02-03</span> в 21:16</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Елена!</p>
+<p>А как в вижуале вывести на экран десятичное число?</p>
+<p>В турбо асме это делалось через прерывания дос, а как в масме через вижуал?</p>
+<p>Или проще передавать в модуль на яву (например с++), откуда выводить стандартными функциями?</p>
+<p>Может есть способ как-то попроще, типа того как Вы выводите здесь строки?</p>
+<p>Спасибо.</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-507" data-onclick="return addComment.moveForm( &quot;comment-507&quot;, &quot;507&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Олег">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	<ul class="children">
+	<li class="comment" id="li-comment-508">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-508" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/30486213de2fcb3fcf532deba7e637d4.jpg" srcset="https://secure.gravatar.com/avatar/30486213de2fcb3fcf532deba7e637d4?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Елена Вставская</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-508"><time datetime="2016-02-03T21:22:32+00:00"><span itemprop="commentTime">2016-02-03</span> в 21:22</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Когда требовалось — переводила в строковое представление, а затем выводила стандартными функциями.</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-508" data-onclick="return addComment.moveForm( &quot;comment-508&quot;, &quot;508&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Елена Вставская">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	<ul class="children">
+	<li class="comment" id="li-comment-509">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-509" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/d90be463fa968dd3cf4fdbc142cff2ac.jpg" srcset="https://secure.gravatar.com/avatar/d90be463fa968dd3cf4fdbc142cff2ac?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Олег</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-509"><time datetime="2016-02-03T21:28:00+00:00"><span itemprop="commentTime">2016-02-03</span> в 21:28</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Стандартная функция типа этой?</p>
+<p>MessageBoxA@16</p>
+<p>&nbsp;</p>
+<p>А как число в строку перевести на масме?</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-509" data-onclick="return addComment.moveForm( &quot;comment-509&quot;, &quot;509&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Олег">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	<ul class="children">
+	<li class="comment" id="li-comment-510">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-510" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/30486213de2fcb3fcf532deba7e637d4.jpg" srcset="https://secure.gravatar.com/avatar/30486213de2fcb3fcf532deba7e637d4?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Елена Вставская</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-510"><time datetime="2016-02-03T21:30:58+00:00"><span itemprop="commentTime">2016-02-03</span> в 21:30</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>В <a href="http://prog-cpp.ru/wp-content/uploads/2014/09/assembler.pdf" download="" rel="nofollow">конспекте</a> есть примеры.</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-510" data-onclick="return addComment.moveForm( &quot;comment-510&quot;, &quot;510&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Елена Вставская">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	<ul class="children">
+	<li class="comment" id="li-comment-511">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-511" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/d90be463fa968dd3cf4fdbc142cff2ac.jpg" srcset="https://secure.gravatar.com/avatar/d90be463fa968dd3cf4fdbc142cff2ac?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Олег</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-511"><time datetime="2016-02-03T21:52:13+00:00"><span itemprop="commentTime">2016-02-03</span> в 21:52</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Советуете скачать конспект?</p>
+<p>Там свежее инфа по асму, чем на сайте?</p>
+<p>Или выборочно?</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	</li><!-- #comment-## -->
+	<li class="comment" id="li-comment-512">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-512" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/30486213de2fcb3fcf532deba7e637d4.jpg" srcset="https://secure.gravatar.com/avatar/30486213de2fcb3fcf532deba7e637d4?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Елена Вставская</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-512"><time datetime="2016-02-03T21:56:02+00:00"><span itemprop="commentTime">2016-02-03</span> в 21:56</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>На сайте просто не все выложено.</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment" id="li-comment-426">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-426" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/7c68d47a4ecc916a81f5e7077bfa62a2.jpg" srcset="https://secure.gravatar.com/avatar/7c68d47a4ecc916a81f5e7077bfa62a2?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Сергей</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-426"><time datetime="2015-10-17T12:48:23+00:00"><span itemprop="commentTime">2015-10-17</span> в 12:48</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Боже, как здорово! Я долго искал именно как в Вижуал Студии на асме прогать. Спасибо огроооомное, друг!</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-426" data-onclick="return addComment.moveForm( &quot;comment-426&quot;, &quot;426&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Сергей">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	</li><!-- #comment-## -->
+	<li class="comment" id="li-comment-356">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-356" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/1b7b1f6e3a032b1a1afa72f42a8899e0.jpg" srcset="https://secure.gravatar.com/avatar/1b7b1f6e3a032b1a1afa72f42a8899e0?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Сергей</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-356"><time datetime="2015-04-08T01:22:45+00:00"><span itemprop="commentTime">2015-04-08</span> в 01:22</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Статья супер!) а у Вас нету самоучителя хорошего по синтаксису ассемблера? или расшифровка что делает каждая строка кода?</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-356" data-onclick="return addComment.moveForm( &quot;comment-356&quot;, &quot;356&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Сергей">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	<ul class="children">
+	<li class="comment" id="li-comment-357">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-357" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/30486213de2fcb3fcf532deba7e637d4.jpg" srcset="https://secure.gravatar.com/avatar/30486213de2fcb3fcf532deba7e637d4?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">admin</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-357"><time datetime="2015-04-08T21:01:26+00:00"><span itemprop="commentTime">2015-04-08</span> в 21:01</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Спасибо за отзыв, Сергей!</p>
+<p>Есть целый конспект по программированию на ассемблере.</p>
+<p><a title="Конспект лекций по ассемблеру" href="http://prog-cpp.ru/download/" target="_blank" rel="nofollow">Скачивайте!</a></p>
+<p>Сейчас, к сожалению, указанный курс снят, а конспекты остались.</p>
+<p>&nbsp;</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-357" data-onclick="return addComment.moveForm( &quot;comment-357&quot;, &quot;357&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи admin">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment" id="li-comment-318">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-318" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/993f1c1e6d9e7375d32d98d619b9d177.jpg" srcset="https://secure.gravatar.com/avatar/993f1c1e6d9e7375d32d98d619b9d177?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">supercyber</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-318"><time datetime="2015-01-21T20:46:58+00:00"><span itemprop="commentTime">2015-01-21</span> в 20:46</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Большое спасибо! Пригодилось.</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-318" data-onclick="return addComment.moveForm( &quot;comment-318&quot;, &quot;318&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи supercyber">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	</li><!-- #comment-## -->
+	<li class="comment" id="li-comment-297">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-297" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/0c9f68a85a86c5b07afdaeaa809cdb3f.jpg" srcset="https://secure.gravatar.com/avatar/0c9f68a85a86c5b07afdaeaa809cdb3f?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Bolshakov</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-297"><time datetime="2015-01-16T18:26:51+00:00"><span itemprop="commentTime">2015-01-16</span> в 18:26</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Полезная статья! Кстати, проверил и на 2005 тоже работает!</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-297" data-onclick="return addComment.moveForm( &quot;comment-297&quot;, &quot;297&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Bolshakov">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	<ul class="children">
+	<li class="comment" id="li-comment-299">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-299" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/30486213de2fcb3fcf532deba7e637d4.jpg" srcset="https://secure.gravatar.com/avatar/30486213de2fcb3fcf532deba7e637d4?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">admin</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-299"><time datetime="2015-01-16T21:14:55+00:00"><span itemprop="commentTime">2015-01-16</span> в 21:14</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Да, в Visual Studio 2013 тоже работает. Только там меню <strong>Настройки построения…</strong> называется <strong>Зависимости сборки</strong> <strong>-&gt; Настройки сборки</strong>.</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-299" data-onclick="return addComment.moveForm( &quot;comment-299&quot;, &quot;299&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи admin">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	<ul class="children">
+	<li class="comment" id="li-comment-539">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-539" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/11e6b60f092cbe1eeeb7384d5669760b.jpg" srcset="https://secure.gravatar.com/avatar/11e6b60f092cbe1eeeb7384d5669760b?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Georgy</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-539"><time datetime="2016-03-24T20:59:22+00:00"><span itemprop="commentTime">2016-03-24</span> в 20:59</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>и добавлять в другое место: &nbsp; ….&nbsp;<strong>12.0\Common7\IDE</strong></p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-539" data-onclick="return addComment.moveForm( &quot;comment-539&quot;, &quot;539&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Georgy">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment" id="li-comment-274">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-274" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/913810d38587d4eacf51f8a44f641f26.jpg" srcset="https://secure.gravatar.com/avatar/913810d38587d4eacf51f8a44f641f26?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Evgeniy</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-274"><time datetime="2015-01-08T16:15:25+00:00"><span itemprop="commentTime">2015-01-08</span> в 16:15</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Благодарю за статью)</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-274" data-onclick="return addComment.moveForm( &quot;comment-274&quot;, &quot;274&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Evgeniy">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	</li><!-- #comment-## -->
+	<li class="comment" id="li-comment-269">
+		<article itemscope="itemscope" itemtype="https://schema.org/UserComments" id="comment-269" class="comment-body">
+			<div class="comment-author">
+				<img alt="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/12c619d8f1e3f09043ecebde4abe23f2.jpg" srcset="https://secure.gravatar.com/avatar/12c619d8f1e3f09043ecebde4abe23f2?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><div class="comment-meta"><div class="author" itemprop="creator">Sergey</div><div class="comment-time"><a href="https://prog-cpp.ru/asm-vs/#comment-269"><time datetime="2014-12-25T01:53:56+00:00"><span itemprop="commentTime">2014-12-25</span> в 01:53</time></a></div></div>			</div><!-- .comment-meta -->
+
+			
+			<section class="comment-content">
+				<span itemprop="commentText"><p>Огромное СПАСИБО )))</p>
+</span>
+							</section><!-- .comment-content -->
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="#comment-269" data-onclick="return addComment.moveForm( &quot;comment-269&quot;, &quot;269&quot;, &quot;respond&quot;, &quot;597&quot; )" aria-label="Комментарий к записи Sergey">Ответить</a> <span>↓</span>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+		<hr>
+	</li><!-- #comment-## -->
+	</ul>
+
+	<div class="comment_navi">
+		<div class="alignleft"></div>
+		<div class="alignright"></div>
+	</div>
+	<div class="clear"></div>
+ 
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Добавить комментарий <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://prog-cpp.ru/asm-vs/#respond" style="display:none;">Отменить ответ</a></small></h3>			<form action="https://prog-cpp.ru/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">Ваш e-mail не будет опубликован.</span> Обязательные поля помечены <span class="required">*</span></p><div id="wp-comment-wrap" class="wp-core-ui wp-editor-wrap tmce-active"><link rel="stylesheet" id="dashicons-css" href="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/dashicons.css" type="text/css" media="all">
+<link rel="stylesheet" id="editor-buttons-css" href="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/editor.css" type="text/css" media="all">
+<div id="wp-comment-editor-container" class="wp-editor-container"><div id="mceu_10" class="mce-tinymce mce-container mce-panel" hidefocus="1" tabindex="-1" role="application" style="visibility: hidden; border-width: 1px; width: 100%;"><div id="mceu_10-body" class="mce-container-body mce-stack-layout"><div id="mceu_11" class="mce-toolbar-grp mce-container mce-panel mce-stack-layout-item mce-first" hidefocus="1" tabindex="-1" role="group"><div id="mceu_11-body" class="mce-container-body mce-stack-layout"><div id="mceu_12" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar"><div id="mceu_12-body" class="mce-container-body mce-flow-layout"><div id="mceu_13" class="mce-container mce-flow-layout-item mce-first mce-last mce-btn-group" role="group"><div id="mceu_13-body"><div id="mceu_0" class="mce-widget mce-btn mce-first" tabindex="-1" role="button" aria-label="Bold"><button id="mceu_0-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-bold"></i></button></div><div id="mceu_1" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Italic"><button id="mceu_1-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-italic"></i></button></div><div id="mceu_2" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Underline"><button id="mceu_2-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-underline"></i></button></div><div id="mceu_3" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Strikethrough"><button id="mceu_3-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-strikethrough"></i></button></div><div id="mceu_4" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Cut"><button id="mceu_4-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-cut"></i></button></div><div id="mceu_5" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Copy"><button id="mceu_5-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-copy"></i></button></div><div id="mceu_6" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Paste"><button id="mceu_6-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-paste"></i></button></div><div id="mceu_7" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Blockquote"><button id="mceu_7-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-blockquote"></i></button></div><div id="mceu_8" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Insert/edit link"><button id="mceu_8-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-link"></i></button></div><div id="mceu_9" class="mce-widget mce-btn mce-last" tabindex="-1" role="button" aria-label="Remove link"><button id="mceu_9-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-unlink"></i></button></div></div></div></div></div></div></div><div id="mceu_14" class="mce-edit-area mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;"><iframe id="comment_ifr" allowtransparency="true" title="Область редактирования. Нажмите Alt-Shift-H, чтобы получить больше информации." style="width: 100%; height: 200px; display: block;" frameborder="0"></iframe></div><div id="mceu_15" class="mce-statusbar mce-container mce-panel mce-stack-layout-item mce-last" hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;"><div id="mceu_15-body" class="mce-container-body mce-flow-layout"><div id="mceu_16" class="mce-path mce-flow-layout-item mce-first"><div class="mce-path-item">&nbsp;</div></div><div id="mceu_17" class="mce-flow-layout-item mce-last mce-resizehandle"><i class="mce-ico mce-i-resize"></i></div></div></div></div></div><textarea class="wp-editor-area" rows="15" autocomplete="off" cols="40" name="comment" id="comment" style="display: none;" aria-hidden="true"></textarea></div>
+</div>
+
+<p class="comment-form-author"><label for="author">Имя <span class="required">*</span></label> <input id="author" name="author" size="30" maxlength="245" aria-required="true" required="required" type="text"></p>
+<p class="comment-form-email"><label for="email">E-mail <span class="required">*</span></label> <input id="email" name="email" size="30" maxlength="100" aria-describedby="email-notes" aria-required="true" required="required" type="text"></p>
+<p class="comment-form-url"><label for="url">Сайт</label> <input id="url" name="url" size="30" maxlength="200" type="text"></p>
+<div class="g-recaptcha" data-sitekey="6LcrBj8UAAAAABn4mPp-vpiTaKWZ_EHGwgEIrtMx" data-theme="light"><div style="width: 304px; height: 78px;"><div><iframe src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/anchor.htm" role="presentation" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox" frameborder="0" height="78" width="304"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div></div><p class="form-submit"><input name="submit" id="submit" class="submit" value="Отправить комментарий" type="submit"> <input name="comment_post_ID" value="597" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+</p>			</form>
+			</div><!-- #respond -->
+		<div class="clear"></div>
+</div>					<script type="text/javascript">
+		VK.init({apiId: 4276450, onlyWidgets: true});
+	</script>
+			<div class="content-article">
+			<div id="vk_comments" style="width: 590px; height: 679.283px; background: transparent none repeat scroll 0% 0%;"><iframe name="fXD7d98f" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/widget_comments.htm" scrolling="no" id="vkwidget1" style="overflow: hidden; height: 679.283px;" frameborder="0" height="133" width="590"></iframe></div>
+	<script type="text/javascript">
+			VK.Widgets.Comments("vk_comments", {limit: 10, width: "590", attach: "*"});
+			</script>
+			</div>
+		</div>		
+		<div class="sidebar-main">
+			<div class="sidebar"><h4>Рубрики</h4><div class="sidebar-intro"><div class="menu-%d1%80%d1%83%d0%b1%d1%80%d0%b8%d0%ba%d0%b8-container"><ul id="menu-%d1%80%d1%83%d0%b1%d1%80%d0%b8%d0%ba%d0%b8" class="menu"><li id="menu-item-287" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-287"><a href="https://prog-cpp.ru/comp-data/">Представление данных и архитектура ЭВМ</a></li>
+<li id="menu-item-715" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-715"><a href="https://prog-cpp.ru/algorithmization/">Алгоритмизация</a></li>
+<li id="menu-item-541" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-541"><a href="https://prog-cpp.ru/vs-winapp/">Создание Windows-приложений</a></li>
+<li id="menu-item-518" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-518"><a href="https://prog-cpp.ru/c/">Язык Си</a></li>
+<li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285"><a href="https://prog-cpp.ru/cpp/">Язык C++</a></li>
+<li id="menu-item-545" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-545"><a href="https://prog-cpp.ru/asm/">Язык ассемблера</a></li>
+<li id="menu-item-308" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-308"><a href="https://prog-cpp.ru/data-struct/">Структуры данных</a></li>
+<li id="menu-item-385" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-385"><a href="https://prog-cpp.ru/algorithm-sort/">Алгоритмы сортировки и поиска</a></li>
+<li id="menu-item-661" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-661"><a href="https://prog-cpp.ru/c-tasks/">Задачи и их решение</a></li>
+<li id="menu-item-979" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-979"><a href="https://prog-cpp.ru/micro-prog/">Программирование микроконтроллеров</a></li>
+</ul></div></div></div>		<div class="sidebar">		<h4>Новое на сайте</h4><div class="sidebar-intro">		<ul>
+											<li>
+					<a href="https://prog-cpp.ru/uml-classes/">UML-диаграммы классов</a>
+											<span class="post-date">17.10.2017</span>
+									</li>
+											<li>
+					<a href="https://prog-cpp.ru/stm32-dac-user/">Защищено: Пользовательский сигнал</a>
+											<span class="post-date">28.06.2017</span>
+									</li>
+											<li>
+					<a href="https://prog-cpp.ru/stm32-dac/">Защищено: Цифро-аналоговый преобразователь</a>
+											<span class="post-date">19.06.2017</span>
+									</li>
+											<li>
+					<a href="https://prog-cpp.ru/data-graph/">Граф</a>
+											<span class="post-date">19.05.2017</span>
+									</li>
+											<li>
+					<a href="https://prog-cpp.ru/stm32-dma-timer/">Защищено: Дискретизация</a>
+											<span class="post-date">03.04.2017</span>
+									</li>
+					</ul>
+		</div></div><div class="sidebar"><h4>Реклама</h4><div class="sidebar-intro">			<div class="textwidget"><script async="" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/adsbygoogle.js"></script>
+<!-- progcpp -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3592083948335083" data-ad-slot="9925786059" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</div></div><div class="sidebar"><h4>Социальные сети</h4><div class="sidebar-intro">			<div class="textwidget"><h2>Группа Вконтакте</h2>
+<!-- VK Widget -->
+<div class="vkontakte">
+<div id="vk_groups" style="width: 220px; height: 140.9px; background: transparent none repeat scroll 0% 0%;"><iframe name="fXDda93b" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/widget_community.htm" scrolling="no" id="vkwidget2" style="overflow: hidden; height: 140.9px;" frameborder="0" height="141" width="220"></iframe></div>
+</div>
+<script type="text/javascript">
+VK.Widgets.Group("vk_groups", {mode: 1, width: "220", height: "400"}, 68149030);
+</script>
+
+<h2>Сообщество Google+</h2>
+<div class="gplus">
+<a href="https://plus.google.com/u/0/communities/102458218858588097327" target="_blank" style="color: #800000; font-weight: bold;">Программирование на Си и C++</a></div>
+<div style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px;" id="___plusone_0"><iframe ng-non-bindable="" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" id="I0_1517217792251" name="I0_1517217792251" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/fastbutton.htm" data-gapiattached="true" title="G+" frameborder="0" width="100%"></iframe></div>
+</div>
+		</div></div></div>	</div>
+</div>
+<div class="footer-wrapper">
+	<div class="footer-main">
+		<div class="footer-left">
+			Все права защищены ©
+		</div>
+		<div class="footer-right">
+		<!--LiveInternet counter--><script type="text/javascript"><!--
+		document.write("<a href='https://www.liveinternet.ru/click' "+
+		"target=_blank><img src='//counter.yadro.ru/hit?t26.5;r"+
+		escape(document.referrer)+((typeof(screen)=="undefined")?"":
+		";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+		screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+		";"+Math.random()+
+		"' alt='' title='LiveInternet: показано число посетителей за"+
+		" сегодня' "+
+		"border='0' width='88' height='15'><\/a>")
+		//--></script><a href="https://www.liveinternet.ru/click" target="_blank"><img src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/hit.htm" alt="" title="LiveInternet: показано число посетителей за сегодня" style="display: none ! important;" hidden="" height="15" border="0" width="88"></a><!--/LiveInternet-->
+		<br>
+		<!-- Yandex.Metrika informer -->
+		<a href="https://metrika.yandex.ru/stat/?id=24303244&amp;from=informer" target="_blank" rel="nofollow"><img src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/3_0_FDDBB9FF_DDBB99FF_0_pageviews.png" style="width: 88px; height: 31px; border: 0px none; display: none ! important;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:24303244,lang:'ru'});return false}catch(e){}" hidden=""></a>
+		<!-- /Yandex.Metrika informer -->
+
+		<!-- Yandex.Metrika counter -->
+		<script type="text/javascript">
+		(function (d, w, c) {
+			(w[c] = w[c] || []).push(function() {
+				try {
+					w.yaCounter24303244 = new Ya.Metrika({id:24303244,
+							clickmap:true,
+							trackLinks:true,
+							accurateTrackBounce:true});
+				} catch(e) { }
+			});
+
+			var n = d.getElementsByTagName("script")[0],
+				s = d.createElement("script"),
+				f = function () { n.parentNode.insertBefore(s, n); };
+			s.type = "text/javascript";
+			s.async = true;
+			s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+			if (w.opera == "[object Opera]") {
+				d.addEventListener("DOMContentLoaded", f, false);
+			} else { f(); }
+		})(document, window, "yandex_metrika_callbacks");
+		</script>
+		<noscript><div><img src="//mc.yandex.ru/watch/24303244" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
+
+		</div>
+		<div class="clear"></div>
+	<script type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = 
+{"apiSettings":{"root":"https:\/\/prog-cpp.ru\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"recaptcha":{"messages":{"empty":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430,
+ \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435, 
+\u0447\u0442\u043e \u0432\u044b \u043d\u0435 
+\u0440\u043e\u0431\u043e\u0442."}},"cached":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/scripts.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/tinymce-comment-field.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/comment-reply.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/comment-reply-4.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/wp-embed.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var userSettings = {"url":"\/","uid":"0","time":"1517151929","secure":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/utils.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/editor.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/wp-a11y.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpLinkL10n = 
+{"title":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c
+ 
+\u0441\u0441\u044b\u043b\u043a\u0443","update":"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c","save":"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c
+ \u0441\u0441\u044b\u043b\u043a\u0443","noTitle":"(\u0431\u0435\u0437 
+\u043d\u0430\u0437\u0432\u0430\u043d\u0438\u044f)","noMatchesFound":"\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432
+ \u043d\u0435 
+\u043d\u0430\u0439\u0434\u0435\u043d\u043e.","linkSelected":"\u0421\u0441\u044b\u043b\u043a\u0430
+ 
+\u0432\u044b\u0431\u0440\u0430\u043d\u0430.","linkInserted":"\u0421\u0441\u044b\u043b\u043a\u0430
+ \u0432\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0430."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/wplink.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/core.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/widget.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/position.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/menu.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var uiAutocompleteL10n = 
+{"noResults":"\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432
+ \u043d\u0435 
+\u043d\u0430\u0439\u0434\u0435\u043d\u043e.","oneResult":"\u041d\u0430\u0439\u0434\u0435\u043d
+ 1 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442. 
+\u0414\u043b\u044f 
+\u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u044f 
+\u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 
+\u043a\u043b\u0430\u0432\u0438\u0448\u0438 
+\u0432\u0432\u0435\u0440\u0445\/\u0432\u043d\u0438\u0437.","manyResults":"\u041d\u0430\u0439\u0434\u0435\u043d\u043e
+ \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432: %d.
+ \u0414\u043b\u044f 
+\u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u044f 
+\u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 
+\u043a\u043b\u0430\u0432\u0438\u0448\u0438 
+\u0432\u0432\u0435\u0440\u0445\/\u0432\u043d\u0438\u0437.","itemSelected":"\u041e\u0431\u044a\u0435\u043a\u0442
+ \u0432\u044b\u0431\u0440\u0430\u043d."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/autocomplete.js"></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://prog-cpp.ru/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: 
+{'comment':{theme:"modern",skin:"lightgray",language:"ru",formats:{alignleft:
+ [{selector: "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: 
+{textAlign:"left"}},{selector: "img,table,dl.wp-caption", classes: 
+"alignleft"}],aligncenter: [{selector: 
+"p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: 
+{textAlign:"center"}},{selector: "img,table,dl.wp-caption", classes: 
+"aligncenter"}],alignright: [{selector: 
+"p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: 
+{textAlign:"right"}},{selector: "img,table,dl.wp-caption", classes: 
+"alignright"}],strikethrough: {inline: 
+"del"}},relative_urls:false,remove_script_host:false,convert_urls:false,browser_spellcheck:true,fix_list_elements:true,entities:"38,amp,60,lt,62,gt",entity_encoding:"raw",keep_styles:false,cache_suffix:"wp-mce-4607-20171116",resize:"vertical",menubar:false,branding:false,preview_styles:"font-family
+ font-size font-weight font-style text-decoration 
+text-transform",end_container_on_empty_block:true,wpeditimage_html5_captions:true,wp_lang_attr:"ru-RU",wp_keep_scroll_position:false,wp_shortcut_labels:{"Heading
+ 1":"access1","Heading 2":"access2","Heading 3":"access3","Heading 
+4":"access4","Heading 5":"access5","Heading 
+6":"access6","Paragraph":"access7","Blockquote":"accessQ","Underline":"metaU","Strikethrough":"accessD","Bold":"metaB","Italic":"metaI","Code":"accessX","Align
+ center":"accessC","Align right":"accessR","Align 
+left":"accessL","Justify":"accessJ","Cut":"metaX","Copy":"metaC","Paste":"metaV","Select
+ all":"metaA","Undo":"metaZ","Redo":"metaY","Bullet 
+list":"accessU","Numbered list":"accessO","Insert\/edit 
+image":"accessM","Remove link":"accessS","Toolbar 
+Toggle":"accessZ","Insert Read More tag":"accessT","Insert Page Break 
+tag":"accessP","Distraction-free writing mode":"accessW","Keyboard 
+Shortcuts":"accessH"},content_css:"https://prog-cpp.ru/wp-content/uploads/tinymce-comment-field-editor.css?t=1489066551",plugins:"colorpicker,lists,fullscreen,image,wordpress,wpeditimage,wplink",selector:"#comment",wpautop:true,indent:false,toolbar1:"bold,italic,underline,strikethrough,cut,copy,paste,blockquote,link,unlink",toolbar2:"",toolbar3:"",toolbar4:"",tabfocus_elements:":prev,:next",body_class:"comment
+ post-type-post post-status-publish post-format-standard 
+page-template-default locale-ru-ru",height:"200",directionality:"ltr"}},
+			qtInit: {},
+			ref: 
+{plugins:"colorpicker,lists,fullscreen,image,wordpress,wpeditimage,wplink",theme:"modern",language:"ru"},
+
+			load_ext: function(url,lang){var 
+sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+
+		};
+		</script>
+		<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/tinymce.js"></script>
+<script type="text/javascript" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/plugin.js"></script>
+<script type="text/javascript">
+tinymce.addI18n( 'ru', {"New document":"\u041d\u043e\u0432\u044b\u0439 
+\u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442","Formats":"\u0424\u043e\u0440\u043c\u0430\u0442\u044b","Headings":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438","Heading
+ 1":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 1","Heading 
+2":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 2","Heading 
+3":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 3","Heading 
+4":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 4","Heading 
+5":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 5","Heading 
+6":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 
+6","Blocks":"\u0411\u043b\u043e\u043a\u0438","Paragraph":"\u0410\u0431\u0437\u0430\u0446","Blockquote":"\u0426\u0438\u0442\u0430\u0442\u0430","Div":"\u0421\u043b\u043e\u0439","Pre":"\u041e\u0442\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439","Preformatted":"\u041e\u0442\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439","Address":"\u0410\u0434\u0440\u0435\u0441","Inline":"\u0421\u0442\u0440\u043e\u043a\u0438","Underline":"\u041f\u043e\u0434\u0447\u0451\u0440\u043a\u043d\u0443\u0442\u044b\u0439","Strikethrough":"\u041f\u0435\u0440\u0435\u0447\u0451\u0440\u043a\u043d\u0443\u0442\u044b\u0439","Subscript":"\u041d\u0438\u0436\u043d\u0438\u0439
+ 
+\u0438\u043d\u0434\u0435\u043a\u0441","Superscript":"\u0412\u0435\u0440\u0445\u043d\u0438\u0439
+ \u0438\u043d\u0434\u0435\u043a\u0441","Clear 
+formatting":"\u041e\u0447\u0438\u0441\u0442\u0438\u0442\u044c 
+\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435","Bold":"\u0416\u0438\u0440\u043d\u044b\u0439","Italic":"\u041a\u0443\u0440\u0441\u0438\u0432","Code":"\u041a\u043e\u0434","Source
+ code":"\u0418\u0441\u0445\u043e\u0434\u043d\u044b\u0439 
+\u043a\u043e\u0434","Font 
+Family":"\u0421\u0435\u043c\u0435\u0439\u0441\u0442\u0432\u043e 
+\u0448\u0440\u0438\u0444\u0442\u043e\u0432","Font 
+Sizes":"\u0420\u0430\u0437\u043c\u0435\u0440\u044b 
+\u0448\u0440\u0438\u0444\u0442\u043e\u0432","Align center":"\u041f\u043e
+ \u0446\u0435\u043d\u0442\u0440\u0443","Align right":"\u041f\u043e 
+\u043f\u0440\u0430\u0432\u043e\u043c\u0443 
+\u043a\u0440\u0430\u044e","Align left":"\u041f\u043e 
+\u043b\u0435\u0432\u043e\u043c\u0443 
+\u043a\u0440\u0430\u044e","Justify":"\u041f\u043e 
+\u0448\u0438\u0440\u0438\u043d\u0435","Increase 
+indent":"\u0423\u0432\u0435\u043b\u0438\u0447\u0438\u0442\u044c 
+\u043e\u0442\u0441\u0442\u0443\u043f","Decrease 
+indent":"\u0423\u043c\u0435\u043d\u044c\u0448\u0438\u0442\u044c 
+\u043e\u0442\u0441\u0442\u0443\u043f","Cut":"\u0412\u044b\u0440\u0435\u0437\u0430\u0442\u044c","Copy":"\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c","Paste":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c","Select
+ all":"\u0412\u044b\u0434\u0435\u043b\u0438\u0442\u044c 
+\u0432\u0441\u0451","Undo":"\u041e\u0442\u043c\u0435\u043d\u0438\u0442\u044c","Redo":"\u041f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u044c","Ok":"OK","Cancel":"\u041e\u0442\u043c\u0435\u043d\u0430","Close":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c","Visual
+ aids":"\u0412\u0438\u0437\u0443\u0430\u043b\u044c\u043d\u044b\u0435 
+\u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0438","Bullet 
+list":"\u041c\u0430\u0440\u043a\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439
+ \u0441\u043f\u0438\u0441\u043e\u043a","Numbered 
+list":"\u041d\u0443\u043c\u0435\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439
+ 
+\u0441\u043f\u0438\u0441\u043e\u043a","Square":"\u041a\u0432\u0430\u0434\u0440\u0430\u0442","Default":"\u041f\u043e
+ 
+\u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e","Circle":"\u041a\u0440\u0443\u0436\u043e\u043a","Disc":"\u0422\u043e\u0447\u043a\u0430","Lower
+ Greek":"\u0421\u0442\u0440\u043e\u0447\u043d\u044b\u0435 
+\u0433\u0440\u0435\u0447\u0435\u0441\u043a\u0438\u0435 
+\u0431\u0443\u043a\u0432\u044b","Lower 
+Alpha":"\u0421\u0442\u0440\u043e\u0447\u043d\u044b\u0435 
+\u043b\u0430\u0442\u0438\u043d\u0441\u043a\u0438\u0435 
+\u0431\u0443\u043a\u0432\u044b","Upper 
+Alpha":"\u0417\u0430\u0433\u043b\u0430\u0432\u043d\u044b\u0435 
+\u043b\u0430\u0442\u0438\u043d\u0441\u043a\u0438\u0435 
+\u0431\u0443\u043a\u0432\u044b","Upper 
+Roman":"\u0417\u0430\u0433\u043b\u0430\u0432\u043d\u044b\u0435 
+\u0440\u0438\u043c\u0441\u043a\u0438\u0435 
+\u0431\u0443\u043a\u0432\u044b","Lower 
+Roman":"\u0421\u0442\u0440\u043e\u0447\u043d\u044b\u0435 
+\u0440\u0438\u043c\u0441\u043a\u0438\u0435 
+\u0431\u0443\u043a\u0432\u044b","Name":"\u0418\u043c\u044f","Anchor":"\u042f\u043a\u043e\u0440\u044c","Anchors":"\u042f\u043a\u043e\u0440\u044f","Id
+ should start with a letter, followed only by letters, numbers, dashes, 
+dots, colons or underscores.":"Id \u0434\u043e\u043b\u0436\u0435\u043d 
+\u043d\u0430\u0447\u0438\u043d\u0430\u0442\u044c\u0441\u044f \u0441 
+\u0431\u0443\u043a\u0432\u044b, \u0438 
+\u0441\u043e\u0434\u0435\u0440\u0436\u0430\u0442\u044c 
+\u0442\u043e\u043b\u044c\u043a\u043e \u0431\u0443\u043a\u0432\u044b, 
+\u0446\u0438\u0444\u0440\u044b, \u0442\u0438\u0440\u0435, 
+\u0442\u043e\u0447\u043a\u0438, 
+\u0437\u0430\u043f\u044f\u0442\u044b\u0435 \u0438\u043b\u0438 
+\u0437\u043d\u0430\u043a 
+\u043f\u043e\u0434\u0447\u0435\u0440\u043a\u0438\u0432\u0430\u043d\u0438\u044f.","Document
+ properties":"\u0421\u0432\u043e\u0439\u0441\u0442\u0432\u0430 
+\u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430","Robots":"\u0420\u043e\u0431\u043e\u0442\u044b","Title":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a","Keywords":"\u041a\u043b\u044e\u0447\u0435\u0432\u044b\u0435
+ 
+\u0441\u043b\u043e\u0432\u0430","Encoding":"\u041a\u043e\u0434\u0438\u0440\u043e\u0432\u043a\u0430","Description":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435","Author":"\u0410\u0432\u0442\u043e\u0440","Image":"\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435","Insert\/edit
+ 
+image":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c
+ 
+\u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443","General":"\u041e\u0431\u0449\u0438\u0435","Advanced":"\u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e","Source":"\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a","Border":"\u0420\u0430\u043c\u043a\u0430","Constrain
+ proportions":"\u0421\u043e\u0445\u0440\u0430\u043d\u044f\u0442\u044c 
+\u043f\u0440\u043e\u043f\u043e\u0440\u0446\u0438\u0438","Vertical 
+space":"\u041e\u0442\u0441\u0442\u0443\u043f (V)","Image 
+description":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435","Style":"\u0421\u0442\u0438\u043b\u044c","Dimensions":"\u0420\u0430\u0437\u043c\u0435\u0440\u044b","Insert
+ image":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435","Date\/time":"\u0414\u0430\u0442\u0430\/\u0432\u0440\u0435\u043c\u044f","Insert
+ date\/time":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0434\u0430\u0442\u0443\/\u0432\u0440\u0435\u043c\u044f","Table of 
+Contents":"\u041e\u0433\u043b\u0430\u0432\u043b\u0435\u043d\u0438\u0435","Insert\/Edit
+ code 
+sample":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c
+ \u0444\u0440\u0430\u0433\u043c\u0435\u043d\u0442 
+\u043a\u043e\u0434\u0430","Language":"\u042f\u0437\u044b\u043a","Media":"\u041c\u0435\u0434\u0438\u0430\u0444\u0430\u0439\u043b\u044b","Insert\/edit
+ 
+media":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c
+ 
+\u043c\u0435\u0434\u0438\u0430","Poster":"\u041f\u043e\u0441\u0442\u0435\u0440","Alternative
+ 
+source":"\u0410\u043b\u044c\u0442\u0435\u0440\u043d\u0430\u0442\u0438\u0432\u043d\u044b\u0439
+ \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a","Paste your embed 
+code below:":"\u0412\u0441\u0442\u0430\u0432\u044c\u0442\u0435 
+\u043a\u043e\u0434 \u043e\u0431\u044a\u0435\u043a\u0442\u0430:","Insert 
+video":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0432\u0438\u0434\u0435\u043e\u0444\u0430\u0439\u043b","Embed":"\u041e\u0431\u044a\u0435\u043a\u0442","Special
+ 
+character":"\u041f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439
+ \u0441\u0438\u043c\u0432\u043e\u043b","Right to 
+left":"\u0421\u043f\u0440\u0430\u0432\u0430 
+\u043d\u0430\u043b\u0435\u0432\u043e","Left to 
+right":"\u0421\u043b\u0435\u0432\u0430 
+\u043d\u0430\u043f\u0440\u0430\u0432\u043e","Emoticons":"\u0418\u043a\u043e\u043d\u043a\u0438
+ Emoticons","Nonbreaking 
+space":"\u041d\u0435\u0440\u0430\u0437\u0440\u044b\u0432\u043d\u044b\u0439
+ \u043f\u0440\u043e\u0431\u0435\u043b","Page 
+break":"\u0420\u0430\u0437\u0440\u044b\u0432 
+\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b","Paste as 
+text":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u043a\u0430\u043a 
+\u0442\u0435\u043a\u0441\u0442","Preview":"\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c","Print":"\u041f\u0435\u0447\u0430\u0442\u044c","Save":"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c","Fullscreen":"\u041d\u0430
+ \u0432\u0435\u0441\u044c \u044d\u043a\u0440\u0430\u043d","Horizontal 
+line":"\u0413\u043e\u0440\u0438\u0437\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f
+ \u043b\u0438\u043d\u0438\u044f","Horizontal 
+space":"\u041e\u0442\u0441\u0442\u0443\u043f (H)","Restore last 
+draft":"\u0412\u043e\u0441\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c
+ \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u0439 
+\u0447\u0435\u0440\u043d\u043e\u0432\u0438\u043a","Insert\/edit 
+link":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c
+ \u0441\u0441\u044b\u043b\u043a\u0443","Remove 
+link":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c 
+\u0441\u0441\u044b\u043b\u043a\u0443","Link":"\u0421\u0441\u044b\u043b\u043a\u0430","Insert
+ link":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0441\u0441\u044b\u043b\u043a\u0443","Target":"\u0426\u0435\u043b\u044c","New
+ window":"\u041d\u043e\u0432\u043e\u0435 \u043e\u043a\u043d\u043e","Text
+ to 
+display":"\u041f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u043c\u044b\u0439
+ \u0442\u0435\u043a\u0441\u0442","Url":"URL","The URL you entered seems 
+to be an email address. Do you want to add the required mailto: 
+prefix?":"\u0412\u0432\u0435\u0434\u0451\u043d\u043d\u044b\u0439 
+\u0432\u0430\u043c\u0438 \u0430\u0434\u0440\u0435\u0441 
+\u043f\u043e\u0445\u043e\u0436 \u043d\u0430 e-mail, 
+\u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c mailto: \u0432 
+\u043d\u0430\u0447\u0430\u043b\u043e?","The URL you entered seems to be 
+an external link. Do you want to add the required http:\/\/ 
+prefix?":"\u0412\u0432\u0435\u0434\u0451\u043d\u043d\u044b\u0439 
+\u0432\u0430\u043c\u0438 \u0430\u0434\u0440\u0435\u0441 
+\u043f\u043e\u0445\u043e\u0436 \u043d\u0430 
+\u0432\u043d\u0435\u0448\u043d\u044e\u044e 
+\u0441\u0441\u044b\u043b\u043a\u0443, 
+\u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c http:\/\/ \u0432 
+\u043d\u0430\u0447\u0430\u043b\u043e?","Color":"\u0426\u0432\u0435\u0442","Custom
+ 
+color":"\u041f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439
+ 
+\u0446\u0432\u0435\u0442","Custom...":"\u041f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439...","No
+ color":"\u0411\u0435\u0437 \u0446\u0432\u0435\u0442\u0430","Could not 
+find the specified string.":"\u041d\u0435 
+\u0443\u0434\u0430\u043b\u043e\u0441\u044c 
+\u043d\u0430\u0439\u0442\u0438 
+\u0443\u043a\u0430\u0437\u0430\u043d\u043d\u0443\u044e 
+\u0441\u0442\u0440\u043e\u043a\u0443.","Replace":"\u0417\u0430\u043c\u0435\u043d\u0438\u0442\u044c","Next":"\u0414\u0430\u043b\u0435\u0435","Prev":"\u041d\u0430\u0437\u0430\u0434","Whole
+ words":"\u0426\u0435\u043b\u044b\u0435 
+\u0441\u043b\u043e\u0432\u0430","Find and 
+replace":"\u041d\u0430\u0439\u0442\u0438 \u0438 
+\u0437\u0430\u043c\u0435\u043d\u0438\u0442\u044c","Replace 
+with":"\u0417\u0430\u043c\u0435\u043d\u0430","Find":"\u041d\u0430\u0439\u0442\u0438","Replace
+ all":"\u0417\u0430\u043c\u0435\u043d\u0438\u0442\u044c 
+\u0432\u0441\u0435","Match case":"\u0421 
+\u0443\u0447\u0451\u0442\u043e\u043c 
+\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430","Spellcheck":"\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0430
+ 
+\u043e\u0440\u0444\u043e\u0433\u0440\u0430\u0444\u0438\u0438","Finish":"\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044c","Ignore
+ all":"\u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c 
+\u0432\u0441\u0435","Ignore":"\u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c","Add
+ to Dictionary":"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432
+ \u0441\u043b\u043e\u0432\u0430\u0440\u044c","Insert 
+table":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0442\u0430\u0431\u043b\u0438\u0446\u0443","Delete 
+table":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c 
+\u0442\u0430\u0431\u043b\u0438\u0446\u0443","Table 
+properties":"\u0421\u0432\u043e\u0439\u0441\u0442\u0432\u0430 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b","Row 
+properties":"\u0421\u0432\u043e\u0439\u0441\u0442\u0432\u0430 
+\u0441\u0442\u0440\u043e\u043a\u0438 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b","Cell 
+properties":"\u0421\u0432\u043e\u0439\u0441\u0442\u0432\u0430 
+\u044f\u0447\u0435\u0439\u043a\u0438 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b","Border 
+color":"\u0426\u0432\u0435\u0442 
+\u0433\u0440\u0430\u043d\u0438\u0446\u044b","Row":"\u0421\u0442\u0440\u043e\u043a\u0430","Rows":"\u0421\u0442\u0440\u043e\u043a\u0438","Column":"\u0421\u0442\u043e\u043b\u0431\u0435\u0446","Cols":"\u0421\u0442\u043e\u043b\u0431\u0446\u044b","Cell":"\u042f\u0447\u0435\u0439\u043a\u0430","Header
+ cell":"\u042f\u0447\u0435\u0439\u043a\u0430 
+\u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430","Header":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a","Body":"\u041e\u0441\u043d\u043e\u0432\u043d\u0430\u044f
+ 
+\u0447\u0430\u0441\u0442\u044c","Footer":"\u041d\u0438\u0436\u043d\u044f\u044f
+ \u0447\u0430\u0441\u0442\u044c","Insert row 
+before":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0441\u0442\u0440\u043e\u043a\u0443 \u0434\u043e","Insert row 
+after":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0441\u0442\u0440\u043e\u043a\u0443 
+\u043f\u043e\u0441\u043b\u0435","Insert column 
+before":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0441\u0442\u043e\u043b\u0431\u0435\u0446 \u0434\u043e","Insert column 
+after":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0441\u0442\u043e\u043b\u0431\u0435\u0446 
+\u043f\u043e\u0441\u043b\u0435","Paste row 
+before":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0441\u0442\u0440\u043e\u043a\u0443 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b \u0434\u043e","Paste row 
+after":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0441\u0442\u0440\u043e\u043a\u0443 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b 
+\u043f\u043e\u0441\u043b\u0435","Delete 
+row":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c 
+\u0441\u0442\u0440\u043e\u043a\u0443","Delete 
+column":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c 
+\u0441\u0442\u043e\u043b\u0431\u0435\u0446","Cut 
+row":"\u0412\u044b\u0440\u0435\u0437\u0430\u0442\u044c 
+\u0441\u0442\u0440\u043e\u043a\u0443 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b","Copy 
+row":"\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c 
+\u0441\u0442\u0440\u043e\u043a\u0443 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b","Merge 
+cells":"\u041e\u0431\u044a\u0435\u0434\u0438\u043d\u0438\u0442\u044c 
+\u044f\u0447\u0435\u0439\u043a\u0438 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b","Split 
+cell":"\u0420\u0430\u0437\u0434\u0435\u043b\u0438\u0442\u044c 
+\u044f\u0447\u0435\u0439\u043a\u0443 
+\u0442\u0430\u0431\u043b\u0438\u0446\u044b","Height":"\u0412\u044b\u0441\u043e\u0442\u0430","Width":"\u0428\u0438\u0440\u0438\u043d\u0430","Caption":"\u041f\u043e\u0434\u043f\u0438\u0441\u044c","Alignment":"\u0412\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u043d\u0438\u0435","H
+ 
+Align":"\u0412\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u043d\u0438\u0435
+ \u043f\u043e 
+\u0433\u043e\u0440\u0438\u0437\u043e\u043d\u0442\u0430\u043b\u0438","Left":"\u0421\u043b\u0435\u0432\u0430","Center":"\u041f\u043e
+ 
+\u0446\u0435\u043d\u0442\u0440\u0443","Right":"\u0421\u043f\u0440\u0430\u0432\u0430","None":"\u041d\u0435\u0442","V
+ 
+Align":"\u0412\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u043d\u0438\u0435
+ \u043f\u043e 
+\u0432\u0435\u0440\u0442\u0438\u043a\u0430\u043b\u0438","Top":"\u0421\u0432\u0435\u0440\u0445\u0443","Middle":"\u041f\u043e\u0441\u0435\u0440\u0435\u0434\u0438\u043d\u0435","Bottom":"\u0421\u043d\u0438\u0437\u0443","Row
+ group":"\u0413\u0440\u0443\u043f\u043f\u0430 
+\u0441\u0442\u0440\u043e\u043a","Column 
+group":"\u0413\u0440\u0443\u043f\u043f\u0430 
+\u0441\u0442\u043e\u043b\u0431\u0446\u043e\u0432","Row 
+type":"\u0422\u0438\u043f \u0441\u0442\u0440\u043e\u043a\u0438","Cell 
+type":"\u0422\u0438\u043f \u044f\u0447\u0435\u0439\u043a\u0438","Cell 
+padding":"\u041e\u0442\u0441\u0442\u0443\u043f\u044b \u0432 
+\u044f\u0447\u0435\u0439\u043a\u0430\u0445","Cell 
+spacing":"\u041e\u0442\u0441\u0442\u0443\u043f\u044b 
+\u043c\u0435\u0436\u0434\u0443 
+\u044f\u0447\u0435\u0439\u043a\u0430\u043c\u0438","Scope":"\u0410\u0442\u0440\u0438\u0431\u0443\u0442
+ scope","Insert 
+template":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0448\u0430\u0431\u043b\u043e\u043d","Templates":"\u0428\u0430\u0431\u043b\u043e\u043d\u044b","Background
+ color":"\u0426\u0432\u0435\u0442 \u0444\u043e\u043d\u0430","Text 
+color":"\u0426\u0432\u0435\u0442 
+\u0442\u0435\u043a\u0441\u0442\u0430","Show 
+blocks":"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c 
+\u0431\u043b\u043e\u043a\u0438","Show invisible 
+characters":"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c 
+\u043d\u0435\u0432\u0438\u0434\u0438\u043c\u044b\u0435 
+\u0441\u0438\u043c\u0432\u043e\u043b\u044b","Words: 
+{0}":"\u0421\u043b\u043e\u0432: {0}","Paste is now in plain text mode. 
+Contents will now be pasted as plain text until you toggle this option 
+off.":"\u0412\u044b\u0431\u0440\u0430\u043d 
+\u0440\u0435\u0436\u0438\u043c 
+\u0432\u0441\u0442\u0430\u0432\u043a\u0438 
+\u043f\u0440\u043e\u0441\u0442\u043e\u0433\u043e 
+\u0442\u0435\u043a\u0441\u0442\u0430. 
+\u0421\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435 
+\u0431\u0443\u0434\u0435\u0442 
+\u0432\u0441\u0442\u0430\u0432\u043b\u044f\u0442\u044c\u0441\u044f 
+\u0432 \u0432\u0438\u0434\u0435 
+\u043f\u0440\u043e\u0441\u0442\u043e\u0433\u043e 
+\u0442\u0435\u043a\u0441\u0442\u0430, \u043f\u043e\u043a\u0430 
+\u0432\u044b \u043d\u0435 
+\u043e\u0442\u043a\u043b\u044e\u0447\u0438\u0442\u0435 
+\u044d\u0442\u043e\u0442 
+\u0440\u0435\u0436\u0438\u043c.\n\n\u0415\u0441\u043b\u0438 \u0432\u044b
+ \u0445\u043e\u0442\u0438\u0442\u0435 
+\u0432\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0442\u0435\u043a\u0441\u0442 \u0441 
+\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c
+ \u0438\u0437 Microsoft Word, 
+\u043f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 
+\u043e\u0442\u043a\u043b\u044e\u0447\u0438\u0442\u044c 
+\u044d\u0442\u043e\u0442 \u0440\u0435\u0436\u0438\u043c. 
+\u0420\u0435\u0434\u0430\u043a\u0442\u043e\u0440 
+\u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0438
+ \u043e\u0447\u0438\u0441\u0442\u0438\u0442 
+\u0442\u0435\u043a\u0441\u0442, 
+\u0441\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439
+ \u0438\u0437 Word.","Rich Text Area. Press ALT-F9 for menu. Press 
+ALT-F10 for toolbar. Press ALT-0 for 
+help":"\u041e\u0431\u043b\u0430\u0441\u0442\u044c 
+\u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f.
+ \u041d\u0430\u0436\u043c\u0438\u0442\u0435 Alt-Shift-H, 
+\u0447\u0442\u043e\u0431\u044b 
+\u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c 
+\u0431\u043e\u043b\u044c\u0448\u0435 
+\u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438.","Rich 
+Text Area. Press Control-Option-H for 
+help.":"\u041e\u0431\u043b\u0430\u0441\u0442\u044c 
+\u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f.
+ \u041d\u0430\u0436\u043c\u0438\u0442\u0435 Control-Option-H, 
+\u0447\u0442\u043e\u0431\u044b 
+\u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c 
+\u0431\u043e\u043b\u044c\u0448\u0435 
+\u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438.","You have
+ unsaved changes are you sure you want to navigate 
+away?":"\u0421\u0434\u0435\u043b\u0430\u043d\u043d\u044b\u0435 
+\u0432\u0430\u043c\u0438 
+\u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f 
+\u0431\u0443\u0434\u0443\u0442 
+\u043e\u0442\u043c\u0435\u043d\u0435\u043d\u044b, 
+\u0435\u0441\u043b\u0438 \u0432\u044b 
+\u0443\u0439\u0434\u0451\u0442\u0435 \u0441 \u044d\u0442\u043e\u0439 
+\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b.","Your browser doesn't
+ support direct access to the clipboard. Please use the Ctrl+X\/C\/V 
+keyboard shortcuts instead.":"\u0412\u0430\u0448 
+\u0431\u0440\u0430\u0443\u0437\u0435\u0440 \u043d\u0435 
+\u043f\u043e\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442
+ \u043f\u0440\u044f\u043c\u043e\u0439 
+\u0434\u043e\u0441\u0442\u0443\u043f \u043a 
+\u0431\u0443\u0444\u0435\u0440\u0443 
+\u043e\u0431\u043c\u0435\u043d\u0430. 
+\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 
+\u0433\u043e\u0440\u044f\u0447\u0438\u0435 
+\u043a\u043b\u0430\u0432\u0438\u0448\u0438 \u0438\u043b\u0438 
+\u043c\u0435\u043d\u044e 
+\u00ab\u041f\u0440\u0430\u0432\u043a\u0430\u00bb 
+\u0432\u0430\u0448\u0435\u0433\u043e 
+\u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430.","Insert":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c","File":"\u0424\u0430\u0439\u043b","Edit":"\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c","Tools":"\u0418\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b","View":"\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440","Table":"\u0422\u0430\u0431\u043b\u0438\u0446\u0430","Format":"\u0424\u043e\u0440\u043c\u0430\u0442","Toolbar
+ 
+Toggle":"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c\/\u0441\u043a\u0440\u044b\u0442\u044c
+ \u043f\u0430\u043d\u0435\u043b\u044c 
+\u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432","Insert
+ Read More tag":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0442\u0435\u0433 \u00ab\u0414\u0430\u043b\u0435\u0435\u00bb","Insert 
+Page Break tag":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c 
+\u0442\u0435\u0433 \u0440\u0430\u0437\u0440\u044b\u0432\u0430 
+\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b","Read 
+more...":"\u0422\u0435\u0433 
+\u00ab\u0414\u0430\u043b\u0435\u0435\u00bb","Distraction-free writing 
+mode":"\u041f\u043e\u043b\u043d\u043e\u044d\u043a\u0440\u0430\u043d\u043d\u044b\u0439
+ \u0440\u0435\u0436\u0438\u043c","No alignment":"\u0411\u0435\u0437 
+\u0432\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u043d\u0438\u044f","Remove":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c","Edit
+ ":"\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c","Paste URL or type
+ to search":"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 URL 
+\u0438\u043b\u0438 \u0441\u043b\u043e\u0432\u043e \u0434\u043b\u044f 
+\u043f\u043e\u0438\u0441\u043a\u0430","Apply":"\u041f\u0440\u0438\u043c\u0435\u043d\u0438\u0442\u044c","Link
+ options":"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438 
+\u0441\u0441\u044b\u043b\u043a\u0438","Visual":"\u0412\u0438\u0437\u0443\u0430\u043b\u044c\u043d\u043e","Text":"\u0422\u0435\u043a\u0441\u0442","Keyboard
+ Shortcuts":"\u0413\u043e\u0440\u044f\u0447\u0438\u0435 
+\u043a\u043b\u0430\u0432\u0438\u0448\u0438","Default 
+shortcuts,":"\u0421\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u044b\u0435
+ 
+\u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0438,","Additional
+ 
+shortcuts,":"\u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435
+ \u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0438,","Focus 
+shortcuts:":"\u041a\u043b\u0430\u0432\u0438\u0448\u0438 
+\u0444\u043e\u043a\u0443\u0441\u0430:","Inline toolbar (when an image, 
+link or preview is 
+selected)":"\u0412\u0441\u043f\u043b\u044b\u0432\u0430\u044e\u0449\u0430\u044f
+ \u043f\u0430\u043d\u0435\u043b\u044c (\u043f\u0440\u0438 
+\u0432\u044b\u0431\u043e\u0440\u0435 
+\u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f, 
+\u0441\u0441\u044b\u043b\u043a\u0438 \u0438\u043b\u0438 
+\u043e\u0431\u044a\u0435\u043a\u0442\u0430)","Editor menu (when 
+enabled)":"\u041c\u0435\u043d\u044e 
+\u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430 
+(\u0435\u0441\u043b\u0438 
+\u0432\u043a\u043b\u044e\u0447\u0435\u043d\u043e)","Editor 
+toolbar":"\u041f\u0430\u043d\u0435\u043b\u044c 
+\u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430","Elements 
+path":"\u041f\u0443\u0442\u0438 
+\u044d\u043b\u0435\u043c\u0435\u043d\u0442\u043e\u0432","Ctrl + Alt + 
+letter:":"Ctrl + Alt + \u0431\u0443\u043a\u0432\u0430:","Shift + Alt + 
+letter:":"Shift + Alt + \u0431\u0443\u043a\u0432\u0430:","Cmd + 
+letter:":"Cmd + \u0431\u0443\u043a\u0432\u0430:","Ctrl + letter:":"Ctrl +
+ 
+\u0431\u0443\u043a\u0432\u0430:","Letter":"\u0411\u0443\u043a\u0432\u0430","Action":"\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u0435","Warning:
+ the link has been inserted but may have errors. Please test 
+it.":"\u0412\u043d\u0438\u043c\u0430\u043d\u0438\u0435: 
+\u0441\u0441\u044b\u043b\u043a\u0430 
+\u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0430, \u043d\u043e 
+\u043c\u043e\u0436\u0435\u0442 
+\u0441\u043e\u0434\u0435\u0440\u0436\u0430\u0442\u044c 
+\u043e\u0448\u0438\u0431\u043a\u0438. 
+\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, 
+\u043f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 
+\u0435\u0451.","To move focus to other buttons use Tab or the arrow 
+keys. To return focus to the editor press Escape or use one of the 
+buttons.":"\u0427\u0442\u043e\u0431\u044b 
+\u043f\u0435\u0440\u0435\u043c\u0435\u0441\u0442\u0438\u0442\u044c 
+\u0444\u043e\u043a\u0443\u0441 \u043d\u0430 
+\u0434\u0440\u0443\u0433\u0438\u0435 
+\u043a\u043d\u043e\u043f\u043a\u0438, 
+\u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 Tab 
+\u0438\u043b\u0438 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 
+\u0441\u043e \u0441\u0442\u0440\u0435\u043b\u043a\u0430\u043c\u0438. 
+\u0427\u0442\u043e\u0431\u044b 
+\u0432\u0435\u0440\u043d\u0443\u0442\u044c 
+\u0444\u043e\u043a\u0443\u0441 \u0432 
+\u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440, 
+\u043d\u0430\u0436\u043c\u0438\u0442\u0435 Escape \u0438\u043b\u0438 
+\u043e\u0434\u043d\u0443 \u0438\u0437 
+\u043a\u043d\u043e\u043f\u043e\u043a.","When starting a new paragraph 
+with one of these formatting shortcuts followed by a space, the 
+formatting will be applied automatically. Press Backspace or Escape to 
+undo.":"\u0415\u0441\u043b\u0438 \u043d\u043e\u0432\u044b\u0439 
+\u0430\u0431\u0437\u0430\u0446 
+\u043d\u0430\u0447\u0438\u043d\u0430\u0435\u0442\u0441\u044f \u0441 
+\u043e\u0434\u043d\u043e\u0439 \u0438\u0437 \u044d\u0442\u0438\u0445 
+\u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0439 \u0438 
+\u043f\u0440\u043e\u0431\u0435\u043b\u0430, 
+\u043f\u0440\u043e\u0438\u0437\u043e\u0439\u0434\u0451\u0442 
+\u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0435
+ 
+\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435.
+ \u041d\u0430\u0436\u043c\u0438\u0442\u0435 Backspace \u0438\u043b\u0438
+ Escape, \u0447\u0442\u043e\u0431\u044b 
+\u043e\u0442\u043c\u0435\u043d\u0438\u0442\u044c.","The following 
+formatting shortcuts are replaced when pressing Enter. Press Escape or 
+the Undo button to 
+undo.":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0435 
+\u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0438 
+\u0437\u0430\u043c\u0435\u043d\u044f\u044e\u0442\u0441\u044f 
+\u043f\u0440\u0438 \u043d\u0430\u0436\u0430\u0442\u0438\u0438 Enter. 
+\u041d\u0430\u0436\u043c\u0438\u0442\u0435 Escape \u0438\u043b\u0438 
+\u043a\u043d\u043e\u043f\u043a\u0443 
+\u043e\u0442\u043c\u0435\u043d\u044b, \u0447\u0442\u043e\u0431\u044b 
+\u043e\u0442\u043c\u0435\u043d\u0438\u0442\u044c.","The next group of 
+formatting shortcuts are applied as you type or when you insert them 
+around plain text in the same paragraph. Press Escape or the Undo button
+ to undo.":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0430\u044f 
+\u0433\u0440\u0443\u043f\u043f\u0430 
+\u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0439 
+\u0437\u0430\u043c\u0435\u043d\u044f\u0435\u0442\u0441\u044f 
+\u043f\u043e \u043c\u0435\u0440\u0435 
+\u043d\u0430\u0431\u043e\u0440\u0430 \u0438\u043b\u0438 
+\u043f\u0440\u0438 
+\u043e\u0431\u0440\u0430\u043c\u043b\u0435\u043d\u0438\u0438 
+\u043f\u0440\u043e\u0441\u0442\u043e\u0433\u043e 
+\u0442\u0435\u043a\u0441\u0442\u0430 \u0432 \u0442\u043e\u043c 
+\u0436\u0435 \u043f\u0430\u0440\u0430\u0433\u0440\u0430\u0444\u0435. 
+\u041d\u0430\u0436\u043c\u0438\u0442\u0435 Escape \u0438\u043b\u0438 
+\u043a\u043d\u043e\u043f\u043a\u0443 
+\u043e\u0442\u043c\u0435\u043d\u044b, \u0447\u0442\u043e\u0431\u044b 
+\u043e\u0442\u043c\u0435\u043d\u0438\u0442\u044c."});
+tinymce.ScriptLoader.markDone( 
+'https://prog-cpp.ru/wp-includes/js/tinymce/langs/ru.js' );
+</script>
+		<script type="text/javascript">
+		var ajaxurl = "/wp-admin/admin-ajax.php";
+		( function() {
+			var init, id, $wrap;
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					init = tinyMCEPreInit.mceInit[id];
+					$wrap = tinymce.$( '#wp-' + id + '-wrap' );
+
+					if ( ( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) && ! init.wp_skip_init ) {
+						tinymce.init( init );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="d53565a9b1" type="hidden">		<h1 id="link-modal-title">Вставить/изменить ссылку</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Закрыть</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Введите адрес назначения (URL)</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" aria-describedby="wplink-enter-url" type="text"></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Текст ссылки</span>
+					<input id="wp-link-text" type="text"></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input id="wp-link-target" type="checkbox"> Открывать в новой вкладке</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Или сделайте ссылку на существующий материал</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Поиск</span>
+						<input id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" type="search">
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">Поисковый запрос не задан. Показаны недавние элементы.</em>
+						<em class="query-notice-hint screen-reader-text">Воспользуйтесь поиском или клавишами вверх/вниз, чтобы выбрать элемент.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+ 				</div>
+ 			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Отмена</button>
+			</div>
+			<div id="wp-link-update">
+				<input value="Добавить ссылку" class="button button-primary" id="wp-link-submit" name="wp-link-submit" type="submit">
+			</div>
+		</div>
+		</form>
+		</div>
+			</div>
+</div>	
+ 
+<script type="text/javascript">function GoTo(link){window.open(link.replace("_","https://"));}</script>
+<script type="text/javascript">$(document).ready(function(){$('#pull').click(function(e) {e.preventDefault();	$('.menuf').slideToggle();});});</script>
+<script type="text/javascript">
+$(function() {
+    $(".youtube").each(function() {
+	  $(this).prepend("<img src='https://i.ytimg.com/vi/" + this.id + "/sddefault.jpg'/><div class='play'></div>");
+      $(document).delegate('#'+this.id, 'click', function() {
+            var iframe_url = "https://www.youtube.com/embed/" + this.id + "?autoplay=1&autohide=1";
+            var iframe = $('<iframe/>', {'frameborder': '0', 'src': iframe_url, 'allowfullscreen': '' })
+            $(this).replaceWith(iframe);
+        });
+    });
+ });
+</script>
+
+
+
+
+
+<div id="wp-a11y-speak-polite" aria-live="polite" aria-relevant="additions text" aria-atomic="true" class="screen-reader-text wp-a11y-speak-region"></div><div id="wp-a11y-speak-assertive" aria-live="assertive" aria-relevant="additions text" aria-atomic="true" class="screen-reader-text wp-a11y-speak-region"></div><iframe name="oauth2relay729582637" id="oauth2relay729582637" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/postmessageRelay.htm" style="width: 1px; height: 1px; position: absolute; top: -100px;" tabindex="-1" aria-hidden="true"></iframe><div id="mceu_24" class="mce-toolbar-grp mce-inline-toolbar-grp mce-container mce-panel" hidefocus="1" tabindex="-1" role="group" style="display: none;"><div id="mceu_24-body" class="mce-container-body mce-stack-layout"><div id="mceu_25" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar"><div id="mceu_25-body" class="mce-container-body mce-flow-layout"><div id="mceu_26" class="mce-container mce-flow-layout-item mce-first mce-last mce-btn-group" role="group"><div id="mceu_26-body"><div id="mceu_18" class="mce-widget mce-btn mce-first" tabindex="-1" role="button" aria-label="Align left"><button id="mceu_18-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-align-left"></i></button></div><div id="mceu_19" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Align center"><button id="mceu_19-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-align-center"></i></button></div><div id="mceu_20" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Align right"><button id="mceu_20-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-align-right"></i></button></div><div id="mceu_21" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="No alignment"><button id="mceu_21-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-align-none"></i></button></div><div id="mceu_22" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Edit "><button id="mceu_22-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-edit"></i></button></div><div id="mceu_23" class="mce-widget mce-btn mce-last" tabindex="-1" role="button" aria-label="Remove"><button id="mceu_23-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-no"></i></button></div></div></div></div></div></div></div><div id="mceu_30" class="mce-toolbar-grp mce-inline-toolbar-grp mce-container mce-panel" hidefocus="1" tabindex="-1" role="group" style="display: none;"><div id="mceu_30-body" class="mce-container-body mce-stack-layout"><div id="mceu_31" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar"><div id="mceu_31-body" class="mce-container-body mce-flow-layout"><div id="mceu_32" class="mce-container mce-flow-layout-item mce-first mce-last mce-btn-group" role="group"><div id="mceu_32-body"><div id="mceu_27" class="wp-link-preview"><a href="#" target="_blank" rel="noopener" tabindex="-1">#</a></div><div id="mceu_28" class="mce-widget mce-btn" tabindex="-1" role="button" aria-label="Edit "><button id="mceu_28-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-edit"></i></button></div><div id="mceu_29" class="mce-widget mce-btn mce-last" tabindex="-1" role="button" aria-label="Remove link"><button id="mceu_29-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-editor-unlink"></i></button></div></div></div></div></div></div></div><div id="mceu_36" class="mce-toolbar-grp mce-inline-toolbar-grp mce-container mce-panel" hidefocus="1" tabindex="-1" role="group" style="display: none;"><div id="mceu_36-body" class="mce-container-body mce-stack-layout"><div id="mceu_37" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar"><div id="mceu_37-body" class="mce-container-body mce-flow-layout"><div id="mceu_38" class="mce-container mce-flow-layout-item mce-first mce-last mce-btn-group" role="group"><div id="mceu_38-body"><div id="mceu_33" class="wp-link-input"><input placeholder="Введите URL или слово для поиска" class="ui-autocomplete-input" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="ui-id-1" type="text"><input style="display:none" type="text"></div><div id="mceu_34" class="mce-widget mce-btn mce-primary" tabindex="-1" role="button" aria-label="Apply"><button id="mceu_34-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-editor-break"></i></button></div><div id="mceu_35" class="mce-widget mce-btn mce-last" tabindex="-1" role="button" aria-label="Link options"><button id="mceu_35-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon dashicons-admin-generic"></i></button></div></div></div></div></div></div></div><ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content wplink-autocomplete" id="ui-id-1" style="display: none;" role="listbox"></ul><span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span><div style="background-color: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2); position: absolute; left: 0px; top: -10000px; transition: visibility 0s linear 0.3s, opacity 0.3s linear; opacity: 0; visibility: hidden; z-index: 2000000000;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: #fff; opacity: 0.05;  filter: alpha(opacity=5)"></div><div class="g-recaptcha-bubble-arrow" style="border: 11px solid transparent; width: 0; height: 0; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;"></div><div class="g-recaptcha-bubble-arrow" style="border: 10px solid transparent; width: 0; height: 0; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;"></div><div style="z-index: 2000000000; position: relative;"><iframe title="проверка recaptcha" src="%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BD%D0%B0%20%D1%8F%D0%B7%D1%8B%D0%BA%D0%B5%20%D0%B0%D1%81%D1%81%D0%B5%D0%BC%D0%B1%D0%BB%D0%B5%D1%80%D0%B0%20%D0%B2%20Microsoft%20Visual%20Studio%202010_files/bframe.htm" style="width: 100%; height: 100%;" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox" name="vhvo66f5alho" frameborder="0"></iframe></div></div></body></html>
+<!-- Dynamic page generated in 0.637 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2018-01-28 20:05:29 -->
+<!-- super cache -->

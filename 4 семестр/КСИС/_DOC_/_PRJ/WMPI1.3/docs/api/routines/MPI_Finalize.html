@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (WinNT; I) [Netscape]">
+   <TITLE>MPI_Finalize</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<A NAME="MPI_Finalize"></A>
+<H1>
+MPI_Finalize</H1>
+Terminates MPI execution environment
+<H2>
+Synopsis</H2>
+
+<PRE>
+<TT>#include "mpi.h"
+int MPI_Finalize()</TT></PRE>
+
+<H2>
+Notes</H2>
+All processes must call this routine before exiting. The number of processes
+running <I>after</I> this routine is called is undefined; it is best not
+to perform much more than a <TT>return rc</TT> after calling <TT><A HREF="MPI_Finalize.html" tppabs="http://www.mcs.anl.gov/mpi/mpi-report-1.1/node151.html#node151">MPI_Finalize</A></TT>.
+<H2>
+Notes for Fortran</H2>
+All MPI routines in Fortran (except for <TT>MPI_WTIME</TT> and <TT>MPI_WTICK</TT>)
+have an additional argument <TT>ierr</TT> at the end of the argument list.
+<TT>ierr</TT> is an integer and has the same meaning as the return value
+of the routine in C. In Fortran, MPI routines are subroutines, and are
+invoked with the <TT>call</TT> statement.
+
+<P>All MPI objects (e.g., <TT>MPI_Datatype</TT>, <TT>MPI_Comm</TT>) are
+of type <TT>INTEGER</TT> in Fortran.
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>&nbsp;
+</BODY>
+</HTML>

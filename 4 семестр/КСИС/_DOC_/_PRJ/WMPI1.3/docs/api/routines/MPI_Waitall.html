@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (WinNT; I) [Netscape]">
+   <TITLE>MPI_Waitall</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<A NAME="MPI_Waitall"></A>
+<H1>
+MPI_Waitall</H1>
+Waits for all given communications to complete
+<H2>
+Synopsis</H2>
+
+<PRE>
+<TT>#include "mpi.h"
+int MPI_Waitall(count, array_of_requests, array_of_statuses )
+int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; count;
+MPI_Request array_of_requests[];
+MPI_Status&nbsp; array_of_statuses[];</TT></PRE>
+
+<H2>
+Input Parameters</H2>
+
+<DL>
+<DT>
+<B>count </B>- lists length (integer)</DT>
+</DL>
+
+<DL>
+<DT>
+<B>array_of_requests </B>- array of requests (array of handles)</DT>
+</DL>
+
+<H2>
+Output Parameter</H2>
+
+<DL>
+<DT>
+<B>array_of_statuses </B>- array of status objects (array of Status)</DT>
+</DL>
+
+<H2>
+Note on status for send operations</H2>
+For send operations, the only use of status is for <A HREF="MPI_Test_cancelled.html" tppabs="http://www.mcs.anl.gov/mpi/mpi-report-1.1/node50.html#node50">MPI_Test_cancelled</A>
+or in the case that there is an error, in which case the MPI_ERROR field
+of status will be set.
+<H2>
+Notes for Fortran</H2>
+All MPI routines in Fortran (except for <TT>MPI_WTIME</TT> and <TT>MPI_WTICK</TT>)
+have an additional argument <TT>ierr</TT> at the end of the argument list.
+<TT>ierr</TT> is an integer and has the same meaning as the return value
+of the routine in C. In Fortran, MPI routines are subroutines, and are
+invoked with the <TT>call</TT> statement.
+
+<P>All MPI objects (e.g., <TT>MPI_Datatype</TT>, <TT>MPI_Comm</TT>) are
+of type <TT>INTEGER</TT> in Fortran.
+<H2>
+Errors</H2>
+All MPI routines (except <TT><A HREF="MPI_Wtime.html">MPI_Wtime</A></TT>
+and <TT><A HREF="MPI_Wtick.html">MPI_Wtick</A></TT>) return an error value;
+C routines as the value of the function and Fortran routines in the last
+argument. Before the value is returned, the current MPI error handler is
+called. By default, this error handler aborts the MPI job. The error handler
+may be changed with <TT><A HREF="MPI_Errhandler_set.html">MPI_Errhandler_set</A></TT>;
+the predefined error handler <TT>MPI_ERRORS_RETURN</TT> may be used to
+cause error values to be returned. Note that MPI does <I>not</I> guarentee
+that an MPI program can continue past an error.
+<DL>
+<DT>
+<B>MPI_SUCCESS </B>- No error; MPI routine completed successfully.</DT>
+</DL>
+
+<DL>
+<DT>
+<B>MPI_ERR_REQUEST </B>- Invalid <TT>MPI_Request</TT>. Either null or,
+in the case of a <TT><A HREF="MPI_Start.html" tppabs="http://www.mcs.anl.gov/mpi/mpi-report-1.1/node51.html#node51">MPI_Start</A></TT>
+or <TT><A HREF="MPI_Startall.html" tppabs="http://www.mcs.anl.gov/mpi/mpi-report-1.1/node51.html#node51">MPI_Startall</A></TT>,
+not a persistent request.</DT>
+</DL>
+
+<DL>
+<DT>
+<B>MPI_ERR_ARG </B>- Invalid argument. Some argument is invalid and is
+not identified by a specific error class (e.g., <TT>MPI_ERR_RANK</TT>).</DT>
+</DL>
+&nbsp;
+
+<P>&nbsp;
+</BODY>
+</HTML>

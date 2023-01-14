@@ -1,0 +1,41 @@
+<HTML>
+<TITLE>MPI_Type_vector</TITLE>
+<BODY BGCOLOR="FFFFFF">
+<A NAME="MPI_Type_vector"><H1>MPI_Type_vector</H1></A>
+Creates a vector (strided) datatype 
+<H2>Synopsis</H2>
+<PRE><CODE>
+#include "mpi.h"
+int MPI_Type_vector( count, blocklen, stride, old_type, newtype )
+int          count;
+int       blocklen;
+int       stride;
+MPI_Datatype old_type;
+MPI_Datatype *newtype;
+</CODE></PRE>
+<H2>Input Parameters</H2>
+<DL><DT><B>count </B> - number of blocks (nonnegative integer) 
+</DL>
+<DL><DT><B>blocklength </B> - number of elements in each block 
+(nonnegative integer) 
+</DL>
+<DL><DT><B>stride </B> - number of elements between start of each block (integer) 
+</DL>
+<DL><DT><B>oldtype </B> - old datatype (handle) 
+</DL>
+<P>
+<H2>Output Parameter</H2>
+<DL><DT><B>newtype </B> - new datatype (handle) 
+</DL>
+<P>
+<H2>Notes for Fortran</H2>
+All MPI routines in Fortran (except for <TT>MPI_WTIME</TT> and <TT>MPI_WTICK</TT>) have
+an additional argument <TT>ierr</TT> at the end of the argument list.  <TT>ierr</TT>
+is an integer and has the same meaning as the return value of the routine
+in C.  In Fortran, MPI routines are subroutines, and are invoked with the
+<TT>call</TT> statement.
+<P>
+All MPI objects (e.g., <TT>MPI_Datatype</TT>, <TT>MPI_Comm</TT>) are of type <TT>INTEGER</TT>
+in Fortran.
+
+</BODY></HTML>

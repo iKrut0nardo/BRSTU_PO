@@ -1,3 +1,0 @@
-Daniil
-DESKTOP-90T2RP6 
-Tuesday, May 11, 2021  12:54:22 PM

@@ -1,3 +1,3 @@
 # Sources
 
-Please put **star** 
+Please *put* a **star** 
